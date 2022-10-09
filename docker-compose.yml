@@ -1,0 +1,24 @@
+version: "3.7"
+services:
+  api:
+    build:
+      context: ./net
+      dockerfile: ../docker/net/Dockerfile
+    links:
+      - "mssql:database"
+    ports:
+      - 8081:80
+      - 8082:443
+    working_dir: /app
+  mssql:
+    image: mcr.microsoft.com/mssql/server
+    volumes: 
+      - db:/var/opt/mssql
+    environment:
+      SA_PASSWORD: "Your_password123"
+      ACCEPT_EULA: "Y"
+    ports:
+      - 1433:1433
+volumes:
+  db:
+    driver: local
