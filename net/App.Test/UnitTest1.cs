@@ -1,5 +1,6 @@
 namespace App.Test;
 
+[TestFixture]
 public class Tests
 {
     [SetUp]

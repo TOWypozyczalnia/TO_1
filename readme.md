@@ -3,7 +3,7 @@
 ## Tematyka
 
 API udostępnia możliwość:
-- dodania filmu - dbo.Movie(Id, Name, ProductionYear, BoxOffice, DirectorId)
+- dodania filmu - dbo.Movie(Id, Name, ProductionYear, BoxOffice)
 - dodania reżysera - dbo.Director(Id, FirstName, LastName, DateOfBirth)
 - dodania aktora - dbo.Actor(Id, FirstName, LastName, DateOfBirth)
 - dodania relacji aktora z filemem - dbo.ActorMovie(ActorId, MovieId)

@@ -15,4 +15,4 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/out .
 
-ENTRYPOINT ["dotnet", "DeviceHub.API.dll"]
+ENTRYPOINT ["dotnet", "App.API.dll"]
