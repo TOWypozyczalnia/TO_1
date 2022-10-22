@@ -1,23 +1,12 @@
 name: .NET CI
 
-env:
-  DOTNET_VERSION: '6'
-  PATH_TO_API_PROJECT: 'net/App.API/App.API.csproj'
-  PATH_TO_SLN_FILE: 'net'
-  PATH_TO_DOTNET: 'net'
-  PATH_TO_WORKFLOWS: '.github/workflows'
-
 on:
   push:
     branches:
       - main
-    # paths: 
-    #   - ${{env.PATH_TO_DOTNET}}
-    #   - ${{env.PATH_TO_WORKFLOWS}}
+    paths: ['net', '.github/workflows']
   pull_request:
-    paths: 
-      - ${{env.PATH_TO_DOTNET}}
-      - ${{env.PATH_TO_WORKFLOWS}}
+    paths: ['net', '.github/workflows']
 
 jobs:
   build:
@@ -29,10 +18,10 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: ${{env.DOTNET_VERSION}}
+          dotnet-version: 6
       - name: Restore dependencies
-        run: dotnet restore ${{env.PATH_TO_SLN_FILE}}
+        run: dotnet restore net
       - name: Build app
-        run: dotnet build -c Release --no-restore ${{env.PATH_TO_SLN_FILE}}
+        run: dotnet build -c Release --no-restore net
       - name: Run automated tests
-        run: dotnet test -c Release --no-build ${{env.PATH_TO_SLN_FILE}}
+        run: dotnet test -c Release --no-build net
