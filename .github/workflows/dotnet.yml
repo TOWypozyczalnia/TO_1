@@ -13,9 +13,11 @@ on:
       - main
     paths: 
       - ${{env.PATH_TO_DOTNET}}
+      - ${{env.PATH_TO_WORKFLOWS}}
   pull_request:
     paths: 
       - ${{env.PATH_TO_DOTNET}}
+      - ${{env.PATH_TO_WORKFLOWS}}
 
 jobs:
   build:
