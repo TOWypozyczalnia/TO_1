@@ -1,3 +1,4 @@
+[![.NET](https://github.com/bastyje/TO_1/actions/workflows/dotnet.yml/badge.svg)](https://github.com/bastyje/TO_1/actions/workflows/dotnet.yml)
 # Testowanie Oprogramowania - Projekt 1
 
 ## Tematyka
