@@ -4,17 +4,18 @@ env:
   DOTNET_VERSION: '6'
   PATH_TO_API_PROJECT: 'net/App.API/App.API.csproj'
   PATH_TO_SLN_FILE: 'net'
-  PATHS: net
+  PATH_TO_DOTNET: net
+  PATH_TO_WORKFLOWS: '.github/workflows'
 
 on:
   push:
     branches:
       - main
     paths: 
-      - ${{env.PATHS}}
+      - ${{env.PATH_TO_DOTNET}}
   pull_request:
     paths: 
-      - ${{env.PATHS}}
+      - ${{env.PATH_TO_DOTNET}}
 
 jobs:
   build:
