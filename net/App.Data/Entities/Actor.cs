@@ -1,6 +1,8 @@
+using App.Data.Interfaces;
+
 namespace App.Data.Entities;
 
-public class Actor
+public class Actor : IBaseEntity<string>
 {
     public string Id { get; set; }
     public string FirstName { get; set; }

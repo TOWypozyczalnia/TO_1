@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using App.Data.Interfaces;
+using App.Data.Repositories;
 
 namespace App.Data;
 
@@ -10,8 +11,9 @@ public static class DependencyInjection
     public static IServiceCollection ConfigureDatabaseConnection(this IServiceCollection services, IConfiguration configuration)
     {
         return services
-            .AddScoped<IAppDbContext>(provider => provider.GetService<AppDbContext>())
+            .AddScoped<IActorRepository, ActorRepository>()
             .AddDbContext<AppDbContext>(options => 
-                options.UseSqlServer(configuration["Data:AppConnection:ConnectionString"]));
+                options.UseSqlServer(configuration["Data:AppConnection:ConnectionString"]))
+            .AddScoped<IAppDbContext>(provider => provider.GetService<AppDbContext>());
     }
 }

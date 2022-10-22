@@ -1,6 +1,8 @@
+using App.Data.Interfaces;
+
 namespace App.Data.Entities;
 
-public class Director
+public class Director : IBaseEntity<string>
 {
     public string Id { get; set; }
     public string FirstName { get; set; }

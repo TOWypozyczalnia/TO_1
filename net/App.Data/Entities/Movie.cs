@@ -1,6 +1,8 @@
+using App.Data.Interfaces;
+
 namespace App.Data.Entities;
 
-public class MoviesController
+public class Movie : IBaseEntity<string>
 {
     public string Id { get; set; }
     public string Name { get; set; }
