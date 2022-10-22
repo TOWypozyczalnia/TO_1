@@ -11,9 +11,9 @@ on:
   push:
     branches:
       - main
-    paths: 
-      - ${{env.PATH_TO_DOTNET}}
-      - ${{env.PATH_TO_WORKFLOWS}}
+    # paths: 
+    #   - ${{env.PATH_TO_DOTNET}}
+    #   - ${{env.PATH_TO_WORKFLOWS}}
   pull_request:
     paths: 
       - ${{env.PATH_TO_DOTNET}}
