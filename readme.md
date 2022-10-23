@@ -38,10 +38,13 @@ tools/windows/cleanup.ps1
 ```
 
 ### Unix (Linux, macOS)
-Przed pierwszym uruchomieniem projektu należy w korzeniu projektu wykonać komendę
-
+Jeżeli na urządzeniu jest zainstalowane oprogramowanie Docker Compose, to należy uruchomić skrtyp
 ```
 chmod +x tools/unix/setup.sh && tools/unix/setup.sh
+```
+W przeciwnym wypadku należy uruchomić
+```
+chmod +x tools/unix/setup.sh && tools/unix/setup-install-docker.sh
 ```
 
 Aby uruchomić aplikację wystarczy uruchmić skrypt
