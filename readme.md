@@ -1,7 +1,7 @@
 [![.NET](https://github.com/bastyje/TO_1/actions/workflows/dotnet.yml/badge.svg)](https://github.com/bastyje/TO_1/actions/workflows/dotnet.yml)
 # Testowanie Oprogramowania - Projekt 1
 
-## Uruchomienie projektu
+## Uruchomienie testów
 
 Aby uruchomić testy jednostkowe aplikacji należy w korzeniu projektu uruchomić komendę
 
@@ -9,6 +9,8 @@ Aby uruchomić testy jednostkowe aplikacji należy w korzeniu projektu uruchomi�
 dotnet test --verbosity normal net
 ```
 Do wykonania powyższego polecenia niezbędne jest oprogramowanie [.NET SDK](https://learn.microsoft.com/en-us/dotnet/core/sdk).
+
+## Uruchomienie aplikacji
 
 W celu uruchomienia aplikacji należy się, w zależności od posiadanego systemu operacyjnego, zastosować do poniższych instrukcji:
 - [Windows](#windows)
