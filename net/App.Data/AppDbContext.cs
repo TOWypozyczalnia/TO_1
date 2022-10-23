@@ -15,9 +15,9 @@ public class AppDbContext : DbContext, IAppDbContext
     }
 
     public IConfiguration Configuration { get; }
-    public DbSet<Actor> Actors { get; set; }
-    public DbSet<Movie> Movies { get; set; }
-    public DbSet<Director> Directors { get; set; }
+    public DbSet<Actor> Actor { get; set; }
+    public DbSet<Movie> Movie { get; set; }
+    public DbSet<Director> Director { get; set; }
 
 
     protected override void OnConfiguring(DbContextOptionsBuilder options)

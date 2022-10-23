@@ -13,6 +13,7 @@ public class MoviesController : BaseController
     {
         _actorRepository = actorRepository;
     }
+    
     [HttpGet]
     public async Task<ActionResult> GetAll()
     {

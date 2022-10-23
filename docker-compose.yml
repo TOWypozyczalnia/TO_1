@@ -11,7 +11,9 @@ services:
       - 8082:443
     working_dir: /app
   mssql:
-    image: mcr.microsoft.com/mssql/server
+    build:
+      context: ./database
+      dockerfile: ../docker/database/Dockerfile
     volumes: 
       - db:/var/opt/mssql
     environment:
