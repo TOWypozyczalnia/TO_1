@@ -56,6 +56,17 @@ Aby wyczyścić maszynę z artefaktów wytworzonych przez aplikację należy uru
 tools/unix/cleanup.sh
 ```
 
+## Korzystanie z aplikacji
+
+Aplikacja jest dostępna pod adresem http://localhost:8081/api lub https://localhost:8082/api.
+
+### Endpointy
+
+#### /Movies
+
+#### /Actors
+
+#### /Directors
 
 ## Tematyka
 
