@@ -9,6 +9,7 @@ Aby uruchomić testy jednostkowe aplikacji należy w korzeniu projektu uruchomi�
 dotnet test --verbosity normal net
 ```
 Do wykonania powyższego polecenia niezbędne jest oprogramowanie [.NET SDK](https://learn.microsoft.com/en-us/dotnet/core/sdk).
+Wykonanie testów nie jest niezbędne, ponieważ są one częścią pipeline'u uruchamianego na githubie. Tam można zweryfikować ich wykonanie.
 
 ## Uruchomienie aplikacji
 
@@ -44,7 +45,7 @@ chmod +x tools/unix/setup.sh && tools/unix/setup.sh
 ```
 W przeciwnym wypadku należy uruchomić
 ```
-chmod +x tools/unix/setup.sh && tools/unix/setup-install-docker.sh
+chmod +x tools/unix/setup-install-docker.sh && tools/unix/setup-install-docker.sh
 ```
 
 Aby uruchomić aplikację wystarczy uruchmić skrypt
