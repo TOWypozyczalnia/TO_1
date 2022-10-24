@@ -9,7 +9,8 @@ Aby uruchomić testy jednostkowe aplikacji należy w korzeniu projektu uruchomi�
 dotnet test --verbosity normal net
 ```
 Do wykonania powyższego polecenia niezbędne jest oprogramowanie [.NET SDK](https://learn.microsoft.com/en-us/dotnet/core/sdk).
-Wykonanie testów nie jest niezbędne, ponieważ są one częścią pipeline'u uruchamianego na githubie. Tam można zweryfikować ich wykonanie.
+
+Wykonanie testów w lokalnym środowisku nie jest niezbędne, ponieważ są one częścią pipeline'u uruchamianego na githubie. Tam można zweryfikować ich wykonanie.
 
 ## Uruchomienie aplikacji
 
