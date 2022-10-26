@@ -26,7 +26,8 @@ namespace App.API.Controllers
         {
             return new OkObjectResult(await actorRepository.GetAllAsync());
         }
-        
+
+        //[HttpGet("{id}")]
         [HttpGet]
         [Route("getsingle")]
         public async Task<ActionResult> GetSingle(int Id)
@@ -43,14 +44,14 @@ namespace App.API.Controllers
         }
         [Route("update")]
         [HttpPost]
-        public async Task<IActionResult> Update(Actor actor)
+        public async Task<IActionResult> Update([FromBody] Actor actor)
         {
             Actor temp = actorRepository.Update(actor);
             return Ok(temp);
         }
         [Route("remove")]
         [HttpPost]
-        public async Task<IActionResult> Remove(Actor actor)
+        public async Task<IActionResult> Remove([FromBody] Actor actor)
         {
             Actor temp = actorRepository.Remove(actor);
             return Ok(temp);
