@@ -20,39 +20,39 @@ namespace App.API.Controllers
         }
         
         
-        [HttpPost]
+        [HttpGet]
         [Route("getall")]
         public async Task<ActionResult> GetAll()
         {
-            return new OkObjectResult(await actorRepository.GetAllAsync<ActorResult, string>());
+            return new OkObjectResult(await actorRepository.GetAllAsync());
         }
         
-        [HttpPost]
+        [HttpGet]
         [Route("getsingle")]
-        public async Task<ActionResult> GetSingle(string Id)
+        public async Task<ActionResult> GetSingle(int Id)
         {
             CancellationToken cancellation = CancellationToken.None;
-            return new OkObjectResult(await actorRepository.GetSingle<ActorResult, string>(Id,cancellation));
+            return new OkObjectResult(await actorRepository.GetSingle(Id,cancellation));
         }
         [Route("addactor")]
         [HttpPost]
-        public async Task<IActionResult>AddActor(ActorResult actor)
+        public async Task<IActionResult>AddActor([FromBody] Actor actor)
         {
-            ActorResult temp = actorRepository.Add<ActorResult, string>(actor);
+            Actor temp = actorRepository.Add(actor);
             return Ok(temp);
         }
         [Route("update")]
         [HttpPost]
-        public async Task<IActionResult> Update(ActorResult actor)
+        public async Task<IActionResult> Update(Actor actor)
         {
-            ActorResult temp = actorRepository.Update<ActorResult, string>(actor);
+            Actor temp = actorRepository.Update(actor);
             return Ok(temp);
         }
         [Route("remove")]
         [HttpPost]
-        public async Task<IActionResult> Remove(ActorResult actor)
+        public async Task<IActionResult> Remove(Actor actor)
         {
-            ActorResult temp = actorRepository.Remove<ActorResult, string>(actor);
+            Actor temp = actorRepository.Remove(actor);
             return Ok(temp);
         }
         
