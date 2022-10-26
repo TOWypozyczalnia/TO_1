@@ -34,6 +34,11 @@ public class AppDbContext : DbContext, IAppDbContext
         return base.SaveChangesAsync(cancellationToken);
     }
 
+    public override int SaveChanges()
+    {
+        return base.SaveChanges();
+    }
+
     DbSet<TEntity> IAppDbContext.Set<TEntity, TKey>()
     {
         return Set<TEntity>();

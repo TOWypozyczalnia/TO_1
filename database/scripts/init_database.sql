@@ -7,8 +7,10 @@ GO
 USE movies;
 GO
 
+-- CREATE TABLES
+
 CREATE TABLE [dbo].[Movie] (
-    [Id] VARCHAR(32) NOT NULL,
+    [Id] INT NOT NULL IDENTITY(1, 1),
     [Name] VARCHAR(100) NOT NULL,
     [ProductionYear] DATETIME NOT NULL,
     [BoxOffice] INT NOT NULL,
@@ -16,7 +18,7 @@ CREATE TABLE [dbo].[Movie] (
 );
 
 CREATE TABLE [dbo].[Actor] (
-    [Id] VARCHAR(32) NOT NULL,
+    [Id] INT NOT NULL IDENTITY(1, 1),
     [FirstName] VARCHAR(100) NOT NULL,
     [LastName] VARCHAR(100) NOT NULL,
     [DateOfBirth] DATETIME NOT NULL,
@@ -25,7 +27,7 @@ CREATE TABLE [dbo].[Actor] (
 
 
 CREATE TABLE [dbo].[Director] (
-    [Id] VARCHAR(32) NOT NULL,
+    [Id] INT NOT NULL IDENTITY(1, 1),
     [FirstName] VARCHAR(100) NOT NULL,
     [LastName] VARCHAR(100) NOT NULL,
     [DateOfBirth] DATETIME NOT NULL,
@@ -35,14 +37,22 @@ GO
 
 
 CREATE TABLE [dbo].[ActorMovie] (
-    [MovieId] VARCHAR(32) NOT NULL CONSTRAINT FK_ActorMovie_Movie REFERENCES dbo.Movie(Id),
-    [ActorId] VARCHAR(32) NOT NULL CONSTRAINT FK_ActorMovie_Actor REFERENCES dbo.Actor(Id)
+    [MovieId] INT NOT NULL CONSTRAINT FK_ActorMovie_Movie REFERENCES dbo.Movie(Id),
+    [ActorId] INT NOT NULL CONSTRAINT FK_ActorMovie_Actor REFERENCES dbo.Actor(Id)
     CONSTRAINT [PK_ActorMovie] PRIMARY KEY CLUSTERED([MovieId] ASC, [ActorId] ASC)
 );
 
+
 CREATE TABLE [dbo].[DirectorMovie] (
-    [MovieId] VARCHAR(32) NOT NULL CONSTRAINT FK_DirectorMovie_Movie REFERENCES dbo.Movie(Id),
-    [DirectorId] VARCHAR(32) NOT NULL CONSTRAINT FK_DirectorMovie_Director REFERENCES dbo.Director(Id)
+    [MovieId] INT NOT NULL CONSTRAINT FK_DirectorMovie_Movie REFERENCES dbo.Movie(Id),
+    [DirectorId] INT NOT NULL CONSTRAINT FK_DirectorMovie_Director REFERENCES dbo.Director(Id)
     CONSTRAINT [PK_DirectorMovie] PRIMARY KEY CLUSTERED([MovieId] ASC, [DirectorId] ASC)
 );
 GO
+
+
+-- CREATE SUPERID
+
+-- yyyyMMddhhmmss
+
+
