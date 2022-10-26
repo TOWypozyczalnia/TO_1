@@ -17,6 +17,6 @@ public class MoviesController : BaseController
     [HttpGet]
     public async Task<ActionResult> GetAll()
     {
-        return new OkObjectResult(await _actorRepository.GetAllAsync<Actor, string>());
+        return new OkObjectResult(await _actorRepository.GetAllAsync<ActorResult, string>());
     }
 }

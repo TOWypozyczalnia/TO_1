@@ -15,7 +15,7 @@ public class AppDbContext : DbContext, IAppDbContext
     }
 
     public IConfiguration Configuration { get; }
-    public DbSet<Actor> Actor { get; set; }
+    public DbSet<ActorResult> Actor { get; set; }
     public DbSet<Movie> Movie { get; set; }
     public DbSet<Director> Director { get; set; }
 
