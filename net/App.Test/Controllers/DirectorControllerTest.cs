@@ -13,33 +13,33 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace App.Test.Controllers
 {
-    public class ActorControllerTest
+    public class DirctorControllerTest
     {
-        private readonly IActorRepository _actorRepository;
+        private readonly IDirectorRepository _directorRepository;
 
-        public ActorControllerTest()
+        public DirctorControllerTest()
         {
-            _actorRepository = A.Fake<IActorRepository>();
+            _directorRepository = A.Fake<IDirectorRepository>();
         }
 
         [Fact]
-        public async void ActorController_GetAll_ReturnOk()
+        public async void DirctorController_GetAll_ReturnOk()
         {
 
             //Arrange
-            var controller = new ActorController(_actorRepository);
+            var controller = new DirectorController(_directorRepository);
             //Act
             var result = await controller.GetAll();
             //Assert
             Assert.IsType<OkObjectResult>(result);
         }
-        
+
         [Fact]
-        public async void ActorController_GetSingle_ReturnOk()
+        public async void DirctorController_GetSingle_ReturnOk()
         {
             //Arrange
             var id = 2;
-            var controller = new ActorController(_actorRepository);
+            var controller = new DirectorController(_directorRepository);
 
             //Act
             var result = await controller.GetSingle(2);
@@ -49,16 +49,16 @@ namespace App.Test.Controllers
 
         }
 
-        
+
 
         [Fact]
-        public void ActorController_AddActor_ReturnOk()
+        public void DirctorController_AddActor_ReturnOk()
         {
             //Arrange
-            var controller = new ActorController(_actorRepository);
-            Actor actor = new Actor();
+            var controller = new DirectorController(_directorRepository);
+            Director director = new Director();
             //Act
-            var result = controller.AddActor(actor);
+            var result = controller.AddDirector(director);
             //Assert
             Assert.NotNull(result);
         }
@@ -66,25 +66,25 @@ namespace App.Test.Controllers
 
 
         [Fact]
-        public void ActorController_Remove_ReturnOk()
+        public void DirctorController_Remove_ReturnOk()
         {
             //Arrange
-            var controller = new ActorController(_actorRepository);
-            Actor actor = new Actor();
+            var controller = new DirectorController(_directorRepository);
+            Director director = new Director();
             //Act
-            var result = controller.Remove(actor);
+            var result = controller.Remove(director);
             //Assert
             Assert.NotNull(result);
         }
 
         [Fact]
-        public void ActorController_Update_ReturnOk()
+        public void DirctorController_Update_ReturnOk()
         {
             //Arrange
-            var controller = new ActorController(_actorRepository);
-            Actor actor = new Actor();
+            var controller = new DirectorController(_directorRepository);
+            Director director = new Director();
             //Act
-            var result = controller.Update(actor);
+            var result = controller.Update(director);
             //Assert
             Assert.NotNull(result);
         }
