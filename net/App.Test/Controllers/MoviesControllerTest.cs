@@ -13,33 +13,33 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace App.Test.Controllers
 {
-    public class ActorControllerTest
+    public class MoviesControllerTest
     {
-        private readonly IActorRepository _actorRepository;
+        private readonly IMovieRepository _movieRepository;
 
-        public ActorControllerTest()
+        public MoviesControllerTest()
         {
-            _actorRepository = A.Fake<IActorRepository>();
+            _movieRepository = A.Fake<IMovieRepository>();
         }
 
         [Fact]
-        public async void ActorController_GetAll_ReturnOk()
+        public async void MoviesController_GetAll_ReturnOk()
         {
 
             //Arrange
-            var controller = new ActorController(_actorRepository);
+            var controller = new MoviesController(_movieRepository);
             //Act
             var result = await controller.GetAll();
             //Assert
             Assert.IsType<OkObjectResult>(result);
         }
-        
+
         [Fact]
-        public async void ActorController_GetSingle_ReturnOk()
+        public async void MoviesController_GetSingle_ReturnOk()
         {
             //Arrange
             var id = 2;
-            var controller = new ActorController(_actorRepository);
+            var controller = new MoviesController(_movieRepository);
 
             //Act
             var result = await controller.GetSingle(2);
@@ -49,16 +49,16 @@ namespace App.Test.Controllers
 
         }
 
-        
+
 
         [Fact]
-        public void ActorController_AddActor_ReturnOk()
+        public void MoviesController_AddActor_ReturnOk()
         {
             //Arrange
-            var controller = new ActorController(_actorRepository);
-            Actor actor = new Actor();
+            var controller = new MoviesController(_movieRepository);
+            Movie movie = new Movie();
             //Act
-            var result = controller.AddActor(actor);
+            var result = controller.AddMovie(movie);
             //Assert
             Assert.NotNull(result);
         }
@@ -66,25 +66,25 @@ namespace App.Test.Controllers
 
 
         [Fact]
-        public void ActorController_Remove_ReturnOk()
+        public void MoviesController_Remove_ReturnOk()
         {
             //Arrange
-            var controller = new ActorController(_actorRepository);
-            Actor actor = new Actor();
+            var controller = new MoviesController(_movieRepository);
+            Movie movie = new Movie();
             //Act
-            var result = controller.Remove(actor);
+            var result = controller.Remove(movie);
             //Assert
             Assert.NotNull(result);
         }
 
         [Fact]
-        public void ActorController_Update_ReturnOk()
+        public void MoviesController_Update_ReturnOk()
         {
             //Arrange
-            var controller = new ActorController(_actorRepository);
-            Actor actor = new Actor();
+            var controller = new MoviesController(_movieRepository);
+            Movie movie = new Movie();
             //Act
-            var result = controller.Update(actor);
+            var result = controller.Update(movie);
             //Assert
             Assert.NotNull(result);
         }
