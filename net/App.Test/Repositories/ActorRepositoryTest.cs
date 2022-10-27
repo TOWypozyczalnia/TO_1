@@ -143,7 +143,7 @@ public class ActorRepositoryTest
 
 		ActorRepository repo = new(dbContext.Object);
 
-		// Arange
+		// Act
 		for (int i = 0; i < recordsToAdd; i++)
 		{
 			repo.Add(new Actor { Id = i });
@@ -178,7 +178,7 @@ public class ActorRepositoryTest
 
 		ActorRepository repo = new(dbContext.Object);
 
-		// Arange
+		// Act
 		for (int i = 0; i < recordsToRemove; i++)
 		{
 			repo.Remove(contents[0]);
@@ -207,7 +207,7 @@ public class ActorRepositoryTest
 
 		ActorRepository repo = new(dbContext.Object);
 
-		// Arange
+		// Act
 		repo.Remove(new Actor { Id = 4 });
 
 		// Assert
@@ -227,6 +227,7 @@ public class ActorRepositoryTest
 
 		ActorRepository repo = new(dbContext.Object);
 
+		// Act
 		repo.Remove(new Actor() { Id = 1 });
 
 		// Assert
@@ -257,7 +258,7 @@ public class ActorRepositoryTest
 
 		ActorRepository repo = new(dbContext.Object);
 
-		// Arange
+		// Act
 		for (int i = 0; i < recordsToRemove; i++)
 		{
 			repo.Update(contents[0]);
@@ -286,7 +287,7 @@ public class ActorRepositoryTest
 
 		ActorRepository repo = new(dbContext.Object);
 
-		// Arange
+		// Act
 		repo.Update(new Actor { Id = 4 });
 
 		// Assert
@@ -306,6 +307,7 @@ public class ActorRepositoryTest
 
 		ActorRepository repo = new(dbContext.Object);
 
+		// Act
 		repo.Update(new Actor() { Id = 1 });
 
 		// Assert
