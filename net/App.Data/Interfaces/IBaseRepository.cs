@@ -5,7 +5,7 @@ public interface IBaseRepository<TEntity, TKey> where TEntity : class, IBaseEnti
     Task<ICollection<TEntity>> GetAllAsync();
     Task<TEntity> GetSingle(TKey id, CancellationToken cancellationToken);
     void Add(TEntity entity);
-    TEntity Update(TEntity entity);
-    TEntity Remove(TEntity entity);
+    void Update(TEntity entity);
+    void Remove(TEntity entity);
 
 }

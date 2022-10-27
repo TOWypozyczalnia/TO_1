@@ -33,17 +33,15 @@ public abstract class BaseRepository<TEntity, TKey> : IBaseRepository<TEntity, T
         _appDbContext.SaveChanges();
     }
 
-    public TEntity Update(TEntity entity)
+    public void Update(TEntity entity)
     {
         var entityEntry = _appDbContext.Set<TEntity, TKey>().Update(entity);
         _appDbContext.SaveChanges();
-        return entityEntry.Entity;
-    }
+	}
 
-    public TEntity Remove(TEntity entity)
+    public void Remove(TEntity entity)
     {
-        var entityEntry = _appDbContext.Set<TEntity, TKey>().Remove(entity);
-        _appDbContext.SaveChanges();
-        return entityEntry.Entity;
+        _appDbContext.Set<TEntity, TKey>().Remove(entity);
+		_appDbContext.SaveChanges();
     }
 }
