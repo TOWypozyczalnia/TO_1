@@ -16,35 +16,32 @@ public abstract class BaseRepository<TEntity, TKey> : IBaseRepository<TEntity, T
 
     public async Task<ICollection<TEntity>> GetAllAsync()
     {
-        return  _appDbContext.Set<TEntity, TKey>().AsNoTracking().ToList();
+        return  await _appDbContext.Set<TEntity, TKey>().AsNoTracking().ToListAsync();
 
 	}
 
     public async Task<TEntity> GetSingle(TKey id, CancellationToken cancellationToken)
     {
-        return _appDbContext.Set<TEntity, TKey>().AsNoTracking().FirstOrDefault();
+        return _appDbContext.Set<TEntity, TKey>().AsNoTracking().FirstOrDefault(d => d.Id.Equals(id));
 
         //return _appDbContext.Set<TEntity, TKey>().Where(x => x.Id!.Equals(id)).FirstOrDefault();
 	}
 
-    public TEntity Add(TEntity entity)
+    public void Add(TEntity entity)
     {
         var entityEntry = _appDbContext.Set<TEntity, TKey>().Add(entity);
         _appDbContext.SaveChanges();
-        return entityEntry.Entity;
     }
 
-    public TEntity Update(TEntity entity)
+    public void Update(TEntity entity)
     {
         var entityEntry = _appDbContext.Set<TEntity, TKey>().Update(entity);
         _appDbContext.SaveChanges();
-        return entityEntry.Entity;
-    }
+	}
 
-    public TEntity Remove(TEntity entity)
+    public void Remove(TEntity entity)
     {
-        var entityEntry = _appDbContext.Set<TEntity, TKey>().Remove(entity);
-        _appDbContext.SaveChanges();
-        return entityEntry.Entity;
+        _appDbContext.Set<TEntity, TKey>().Remove(entity);
+		_appDbContext.SaveChanges();
     }
 }
