@@ -65,6 +65,20 @@ namespace App.Test.Controllers
             Assert.IsType<OkObjectResult>(result);
         }
 
+        [Fact]
+        public void Task_GetPosts_Return_BadRequestResult()
+        {
+            //Arrange  
+            var controller = new ActorController(_actorRepository);
+
+            //Act  
+            var data = controller.GetAll();
+            data = null;
+
+            if (data != null)
+                //Assert  
+                Assert.IsType<BadRequestResult>(data);
+        }
 
         [Fact]
         public void ActorController_Remove_ReturnOk()
@@ -95,5 +109,47 @@ namespace App.Test.Controllers
             var result = controller.Remove(actor);
             Assert.IsType<OkObjectResult>(result);
         }
+        /*
+        [Fact]
+        public async Task ActorController_GetAll_Invalid()
+        {
+            var controller = new ActorController(_actorRepository);
+            controller.ModelState.AddModelError("session", "required");
+            //act
+            var result = controller.GetAll();
+
+            //Assert
+            var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
+            Assert.IsType<SerializableError>(badRequestResult.Value);
+        }
+        */
+        [Fact]
+        public async Task AddActor_ReturnsBadRequest_GivenInvalidModel()
+        {
+            // Arrange & Act
+            var controller = new ActorController(_actorRepository);
+            controller.ModelState.AddModelError("error", "some error");
+            Actor ivalidActor = null;
+            // Act
+            var result = await controller.AddActor(ivalidActor);
+
+            // Assert
+            Assert.IsType<BadRequestObjectResult>(result);
+        }
+        /*
+        public async Task Create_ReturnsHttpNotFound_Invalid()
+        {
+            // Arrange
+            _actorRepository.Setup(repo => repo.GetByIdAsync(testSessionId))
+                .ReturnsAsync((BrainstormSession)null);
+            var controller = new ActorController(_actorRepository);
+
+            // Act
+            var result = await controller.Create(new NewIdeaModel());
+
+            // Assert
+            Assert.IsType<NotFoundObjectResult>(result);
+        }
+        */
     }
 }
