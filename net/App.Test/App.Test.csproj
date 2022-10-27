@@ -9,8 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
-    <PackageReference Include="coverlet.collector" Version="3.1.2" />
+	<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
+	<PackageReference Include="coverlet.collector" Version="3.1.2" />
     <PackageReference Include="xunit.extensibility.core" Version="2.4.2" />
 	<PackageReference Include="xunit" Version="2.4.2" />
 	<PackageReference Include="FakeItEasy" Version="7.3.1" />
@@ -19,6 +19,12 @@
   <ItemGroup>
     <ProjectReference Include="..\App.API\App.API.csproj" />
     <ProjectReference Include="..\App.Data\App.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Controllers\ActorControllerTest.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
   </ItemGroup>
 
 </Project>
