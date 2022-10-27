@@ -7,23 +7,44 @@ namespace App.API.Controllers;
 
 public class MoviesController : BaseController
 {
-    private readonly IActorRepository _actorRepository;
+    private readonly IMovieRepository _movieRepository;
 
-    public MoviesController(IActorRepository actorRepository)
+    public MoviesController(IMovieRepository movieRepository)
     {
-        _actorRepository = actorRepository;
+        _movieRepository = movieRepository;
     }
-    
-    [HttpGet]
+
+    [HttpGet("GetAll")]
     public async Task<ActionResult> GetAll()
     {
-        return new OkObjectResult(await _actorRepository.GetAllAsync());
+        return new OkObjectResult(await _movieRepository.GetAllAsync());
     }
 
-    [HttpPost]
-    public async Task<ActionResult> Add([FromBody] Actor actor)
+    [HttpGet("{id}")]
+    public async Task<ActionResult> GetSingle(int Id)
     {
-        _actorRepository.Add(actor);
-        return new OkResult();
+        CancellationToken cancellation = CancellationToken.None;
+        return new OkObjectResult(await _movieRepository.GetSingle(Id, cancellation));
+    }
+
+    [HttpPost("AddMovie")]
+    public async Task<IActionResult> AddMovie([FromBody] Movie Movie)
+    {
+        Movie temp = _movieRepository.Add(Movie);
+        return Ok(temp);
+    }
+
+    [HttpPost("Update")]
+    public async Task<IActionResult> Update(Movie Movie)
+    {
+        Movie temp = _movieRepository.Update(Movie);
+        return Ok(temp);
+    }
+
+    [HttpPost("Remove")]
+    public async Task<IActionResult> Remove(Movie Movie)
+    {
+        Movie temp = _movieRepository.Remove(Movie);
+        return Ok(temp);
     }
 }
