@@ -8,8 +8,7 @@ using System;
 
 namespace App.API.Controllers
 {
-    [Route("api/[controller]/[action]")]
-    [ApiController]
+
     public class ActorController : BaseController
     {
         private readonly IActorRepository actorRepository;
@@ -20,37 +19,31 @@ namespace App.API.Controllers
         }
         
         
-        [HttpGet]
-        [Route("getall")]
+        [HttpGet("GetAll")]
         public async Task<ActionResult> GetAll()
         {
             return new OkObjectResult(await actorRepository.GetAllAsync());
         }
 
-        //[HttpGet("{id}")]
-        [HttpGet]
-        [Route("getsingle")]
+        [HttpGet("{id}")]
         public async Task<ActionResult> GetSingle(int Id)
         {
             CancellationToken cancellation = CancellationToken.None;
             return new OkObjectResult(await actorRepository.GetSingle(Id,cancellation));
         }
-        [Route("addactor")]
-        [HttpPost]
+        [HttpPost("AddActor")]
         public async Task<IActionResult>AddActor([FromBody] Actor actor)
         {
             Actor temp = actorRepository.Add(actor);
             return Ok(temp);
         }
-        [Route("update")]
-        [HttpPost]
+        [HttpPost("Update")]
         public async Task<IActionResult> Update([FromBody] Actor actor)
         {
             Actor temp = actorRepository.Update(actor);
             return Ok(temp);
         }
-        [Route("remove")]
-        [HttpPost]
+        [HttpPost("Remove")]
         public async Task<IActionResult> Remove([FromBody] Actor actor)
         {
             Actor temp = actorRepository.Remove(actor);
