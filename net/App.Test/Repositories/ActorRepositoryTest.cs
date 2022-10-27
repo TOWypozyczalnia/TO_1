@@ -30,12 +30,6 @@ public class ActorRepositoryTest
 		Mock<DbSet<Actor>> dbSet = contents.AsQueryable().BuildMockDbSet();
 		dbContext.Setup(s => s.Set<Actor, int>()).Returns(dbSet.Object);
 
-		Actor added = new()
-		{
-			FirstName = "Added",
-			Id = 2,
-		};
-
 		ActorRepository repo = new(dbContext.Object);
 
 		Actor? result;
@@ -235,6 +229,7 @@ public class ActorRepositoryTest
 	}
 
 	#endregion Remove
+
 	#region Update
 
 	[Theory]

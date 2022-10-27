@@ -30,21 +30,21 @@ public class DirectorController : BaseController
     [HttpPost("AddDirector")]
     public async Task<IActionResult> AddDirector([FromBody] Director director)
     {
-        Director temp = _directorRepository.Add(director);
-        return Ok(temp);
+        _directorRepository.Add(director);
+        return Ok();
     }
 
     [HttpPost("Update")]
     public async Task<IActionResult> Update(Director director)
     {
-        Director temp = _directorRepository.Update(director);
-        return Ok(temp);
+        _directorRepository.Update(director);
+        return Ok();
     }
 
     [HttpPost("Remove")]
     public async Task<IActionResult> Remove(Director director)
     {
-        Director temp = _directorRepository.Remove(director);
-        return Ok(temp);
+        _directorRepository.Remove(director);
+        return Ok();
     }
 }

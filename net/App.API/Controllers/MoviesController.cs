@@ -30,21 +30,21 @@ public class MoviesController : BaseController
     [HttpPost("AddMovie")]
     public async Task<IActionResult> AddMovie([FromBody] Movie Movie)
     {
-        Movie temp = _movieRepository.Add(Movie);
-        return Ok(temp);
+        _movieRepository.Add(Movie);
+        return Ok();
     }
 
     [HttpPost("Update")]
     public async Task<IActionResult> Update(Movie Movie)
     {
-        Movie temp = _movieRepository.Update(Movie);
-        return Ok(temp);
+        _movieRepository.Update(Movie);
+        return Ok();
     }
 
     [HttpPost("Remove")]
     public async Task<IActionResult> Remove(Movie Movie)
     {
-        Movie temp = _movieRepository.Remove(Movie);
-        return Ok(temp);
+        _movieRepository.Remove(Movie);
+        return Ok();
     }
 }
