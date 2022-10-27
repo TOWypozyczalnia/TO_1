@@ -52,41 +52,41 @@ namespace App.Test.Controllers
 
 
         [Fact]
-        public void MoviesController_AddActor_ReturnOk()
+        public async void MoviesController_AddActor_ReturnOk()
         {
             //Arrange
             var controller = new MoviesController(_movieRepository);
             Movie movie = new Movie();
             //Act
-            var result = controller.AddMovie(movie);
+            var result = await controller.AddMovie(movie);
             //Assert
-            Assert.NotNull(result);
+            Assert.IsType<OkObjectResult>(result);
         }
 
 
 
         [Fact]
-        public void MoviesController_Remove_ReturnOk()
+        public async void MoviesController_Remove_ReturnOk()
         {
             //Arrange
             var controller = new MoviesController(_movieRepository);
             Movie movie = new Movie();
             //Act
-            var result = controller.Remove(movie);
+            var result = await controller.Remove(movie);
             //Assert
-            Assert.NotNull(result);
+            Assert.IsType<OkObjectResult>(result);
         }
 
         [Fact]
-        public void MoviesController_Update_ReturnOk()
+        public async void MoviesController_Update_ReturnOk()
         {
             //Arrange
             var controller = new MoviesController(_movieRepository);
             Movie movie = new Movie();
             //Act
-            var result = controller.Update(movie);
+            var result = await controller.Update(movie);
             //Assert
-            Assert.NotNull(result);
+            Assert.IsType<OkObjectResult>(result);
         }
 
     }

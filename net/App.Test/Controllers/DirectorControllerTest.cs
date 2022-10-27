@@ -52,41 +52,41 @@ namespace App.Test.Controllers
 
 
         [Fact]
-        public void DirctorController_AddActor_ReturnOk()
+        public async void DirctorController_AddActor_ReturnOk()
         {
             //Arrange
             var controller = new DirectorController(_directorRepository);
             Director director = new Director();
             //Act
-            var result = controller.AddDirector(director);
+            var result = await controller.AddDirector(director);
             //Assert
-            Assert.NotNull(result);
+            Assert.IsType<OkObjectResult>(result);
         }
 
 
 
         [Fact]
-        public void DirctorController_Remove_ReturnOk()
+        public async void DirctorController_Remove_ReturnOk()
         {
             //Arrange
             var controller = new DirectorController(_directorRepository);
             Director director = new Director();
             //Act
-            var result = controller.Remove(director);
+            var result = await controller.Remove(director);
             //Assert
-            Assert.NotNull(result);
+            Assert.IsType<OkObjectResult>(result);
         }
 
         [Fact]
-        public void DirctorController_Update_ReturnOk()
+        public async void DirctorController_Update_ReturnOk()
         {
             //Arrange
             var controller = new DirectorController(_directorRepository);
             Director director = new Director();
             //Act
-            var result = controller.Update(director);
+            var result = await controller.Update(director);
             //Assert
-            Assert.NotNull(result);
+            Assert.IsType<OkObjectResult>(result);
         }
 
     }

@@ -52,41 +52,42 @@ namespace App.Test.Controllers
         
 
         [Fact]
-        public void ActorController_AddActor_ReturnOk()
+        public async void ActorController_AddActor_ReturnOk()
         {
             //Arrange
             var controller = new ActorController(_actorRepository);
             Actor actor = new Actor();
             //Act
-            var result = controller.AddActor(actor);
+            var result = await controller.AddActor(actor);
+            //Assert
+            Assert.IsType<OkObjectResult>(result);
+
+        }
+
+
+
+        [Fact]
+        public async void ActorController_Remove_ReturnOk()
+        {
+            //Arrange
+            var controller = new ActorController(_actorRepository);
+            Actor actor = new Actor();
+            //Act
+            var result = await controller.Remove(actor);
             //Assert
             Assert.IsType<OkObjectResult>(result);
         }
 
-
-
         [Fact]
-        public void ActorController_Remove_ReturnOk()
+        public async void ActorController_Update_ReturnOk()
         {
             //Arrange
             var controller = new ActorController(_actorRepository);
             Actor actor = new Actor();
             //Act
-            var result = controller.Remove(actor);
+            var result = await controller.Update(actor);
             //Assert
-            Assert.NotNull(result);
-        }
-
-        [Fact]
-        public void ActorController_Update_ReturnOk()
-        {
-            //Arrange
-            var controller = new ActorController(_actorRepository);
-            Actor actor = new Actor();
-            //Act
-            var result = controller.Update(actor);
-            //Assert
-            Assert.NotNull(result);
+            Assert.IsType<OkObjectResult>(result);
         }
 
     }
