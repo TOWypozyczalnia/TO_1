@@ -1,3 +1,5 @@
+using System;
+
 using App.Data.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,13 +16,18 @@ public abstract class BaseRepository<TEntity, TKey> : IBaseRepository<TEntity, T
 
     public async Task<ICollection<TEntity>> GetAllAsync()
     {
-        return await _appDbContext.Set<TEntity, TKey>().AsNoTracking().ToListAsync();
-    }
+        //return await _appDbContext.Set<TEntity, TKey>().AsNoTracking().ToListAsync();
 
-    public async Task<TEntity> GetSingle(TKey id, CancellationToken cancellationToken)
+        return _appDbContext.Set<TEntity, TKey>().ToList();
+
+	}
+
+    public async Task<TEntity?> GetSingle(TKey id, CancellationToken cancellationToken)
     {
-        return await _appDbContext.Set<TEntity, TKey>().AsNoTracking().FirstOrDefaultAsync(cancellationToken);
-    }
+        //return  _appDbContext.Set<TEntity, TKey>().AsNoTracking().FirstOrDefault();
+
+        return _appDbContext.Set<TEntity, TKey>().Where(x => x.Id!.Equals(id)).FirstOrDefault();
+	}
 
     public TEntity Add(TEntity entity)
     {
