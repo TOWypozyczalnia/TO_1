@@ -27,9 +27,8 @@ namespace App.Test.Controllers
         {
 
             //Arrange
-            //var actors = A.Fake<ICollection<Actor>>();
             var controller = new ActorController(_actorRepository);
-            //act
+            //Act
             var result = await controller.GetAll();
             //Assert
             Assert.IsType<OkObjectResult>(result);
@@ -39,11 +38,10 @@ namespace App.Test.Controllers
         public async void ActorController_GetSingle_ReturnOk()
         {
             //Arrange
-            //var actors = A.Fake<ICollection<Actor>>();
             var id = 2;
             var controller = new ActorController(_actorRepository);
 
-            //act
+            //Act
             var result = await controller.GetSingle(2);
 
             //Assert
@@ -56,12 +54,12 @@ namespace App.Test.Controllers
         [Fact]
         public void ActorController_AddActor_ReturnOk()
         {
-
+            //Arrange
             var controller = new ActorController(_actorRepository);
-            //A.CallTo(() => _actorRepository.GetSingle(1, new CancellationToken()));
             Actor actor = new Actor();
+            //Act
             var result = controller.AddActor(actor);
-            //Assert.IsType<OkObjectResult>(result);
+            //Assert
             Assert.NotNull(result);
         }
 
@@ -70,21 +68,24 @@ namespace App.Test.Controllers
         [Fact]
         public void ActorController_Remove_ReturnOk()
         {
-
+            //Arrange
             var controller = new ActorController(_actorRepository);
-            //A.CallTo(() => _actorRepository.GetSingle(1, new CancellationToken()));
             Actor actor = new Actor();
+            //Act
             var result = controller.Remove(actor);
+            //Assert
             Assert.NotNull(result);
         }
 
         [Fact]
         public void ActorController_Update_ReturnOk()
         {
+            //Arrange
             var controller = new ActorController(_actorRepository);
-            //A.CallTo(() => _actorRepository.GetSingle(1, new CancellationToken()));
             Actor actor = new Actor();
+            //Act
             var result = controller.Update(actor);
+            //Assert
             Assert.NotNull(result);
         }
 
