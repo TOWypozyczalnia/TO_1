@@ -1,5 +1,4 @@
-﻿using App.Data;
-using App.Data.Entities;
+﻿using App.Data.Entities;
 using App.Data.Interfaces;
 using App.Data.Repositories;
 
@@ -190,7 +189,7 @@ public class ActorRepositoryTest
 	}
 
 	[Fact]
-	public void Remove_InValidRecord_DbSetRemoveCalledOnce()
+	public void Remove_InvalidRecord_DbSetRemoveCalledOnce()
 	{
 		// Arange
 		Mock<IAppDbContext> dbContext = new();
@@ -209,15 +208,14 @@ public class ActorRepositoryTest
 		ActorRepository repo = new(dbContext.Object);
 
 		// Arange
-		repo.Remove(new Actor { Id = 4});
+		repo.Remove(new Actor { Id = 4 });
 
 		// Assert
 		dbContext.Verify(x => x.Set<Actor, int>().Remove(It.IsAny<Actor>()), Times.Once);
 	}
 
-
 	[Fact]
-	public void Remove_FromEmptyTable_a()
+	public void Remove_FromEmptyTable_DbSetRemoveCalledOnce()
 	{
 		// Arange
 		Mock<IAppDbContext> dbContext = new();
@@ -237,5 +235,82 @@ public class ActorRepositoryTest
 
 	#endregion Remove
 	#region Update
+
+	[Theory]
+	[InlineData(1)]
+	[InlineData(3)]
+	public void Update_NValidRecords_DbSetUpdateCalledNTimes(int recordsToRemove)
+	{
+		// Arange
+		Mock<IAppDbContext> dbContext = new();
+		List<Actor> contents = new()
+		{
+			new Actor() { Id = 1, FirstName = "Jeden" },
+			new Actor() { Id = 2, FirstName = "Dwa" },
+			new Actor() { Id = 3, FirstName = "Trzy" },
+		};
+		Mock<DbSet<Actor>> dbSet = contents.AsQueryable().BuildMockDbSet();
+
+		var added = new Actor() { Id = 0 };
+
+		dbContext.Setup(s => s.Set<Actor, int>()).Returns(dbSet.Object);
+
+		ActorRepository repo = new(dbContext.Object);
+
+		// Arange
+		for (int i = 0; i < recordsToRemove; i++)
+		{
+			repo.Update(contents[0]);
+		}
+
+		// Assert
+		dbContext.Verify(x => x.Set<Actor, int>().Update(It.IsAny<Actor>()), Times.Exactly(recordsToRemove));
+	}
+
+	[Fact]
+	public void Update_InvalidRecord_DbSetUpdateCalledOnce()
+	{
+		// Arange
+		Mock<IAppDbContext> dbContext = new();
+		List<Actor> contents = new()
+		{
+			new Actor() { Id = 1, FirstName = "Jeden" },
+			new Actor() { Id = 2, FirstName = "Dwa" },
+			new Actor() { Id = 3, FirstName = "Trzy" },
+		};
+		Mock<DbSet<Actor>> dbSet = contents.AsQueryable().BuildMockDbSet();
+
+		var added = new Actor() { Id = 0 };
+
+		dbContext.Setup(s => s.Set<Actor, int>()).Returns(dbSet.Object);
+
+		ActorRepository repo = new(dbContext.Object);
+
+		// Arange
+		repo.Update(new Actor { Id = 4 });
+
+		// Assert
+		dbContext.Verify(x => x.Set<Actor, int>().Update(It.IsAny<Actor>()), Times.Once);
+	}
+
+	[Fact]
+	public void Update_FromEmptyTable_DbSetUpdateCalledOnce()
+	{
+		// Arange
+		Mock<IAppDbContext> dbContext = new();
+		List<Actor> contents = new()
+		{ };
+		Mock<DbSet<Actor>> dbSet = contents.AsQueryable().BuildMockDbSet();
+
+		dbContext.Setup(s => s.Set<Actor, int>()).Returns(dbSet.Object);
+
+		ActorRepository repo = new(dbContext.Object);
+
+		repo.Update(new Actor() { Id = 1 });
+
+		// Assert
+		dbContext.Verify(x => x.Set<Actor, int>().Update(It.IsAny<Actor>()), Times.Once);
+	}
+
 	#endregion Update
 }
