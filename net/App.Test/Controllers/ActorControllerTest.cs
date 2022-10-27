@@ -60,7 +60,7 @@ namespace App.Test.Controllers
             //Act
             var result = controller.AddActor(actor);
             //Assert
-            Assert.NotNull(result);
+            Assert.IsType<OkObjectResult>(result);
         }
 
 
