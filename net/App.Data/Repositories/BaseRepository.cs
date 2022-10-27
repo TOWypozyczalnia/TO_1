@@ -16,17 +16,15 @@ public abstract class BaseRepository<TEntity, TKey> : IBaseRepository<TEntity, T
 
     public async Task<ICollection<TEntity>> GetAllAsync()
     {
-        //return await _appDbContext.Set<TEntity, TKey>().AsNoTracking().ToListAsync();
-
-        return _appDbContext.Set<TEntity, TKey>().ToList();
+        return  _appDbContext.Set<TEntity, TKey>().AsNoTracking().ToList();
 
 	}
 
-    public async Task<TEntity?> GetSingle(TKey id, CancellationToken cancellationToken)
+    public async Task<TEntity> GetSingle(TKey id, CancellationToken cancellationToken)
     {
-        //return  _appDbContext.Set<TEntity, TKey>().AsNoTracking().FirstOrDefault();
+        return _appDbContext.Set<TEntity, TKey>().AsNoTracking().FirstOrDefault();
 
-        return _appDbContext.Set<TEntity, TKey>().Where(x => x.Id!.Equals(id)).FirstOrDefault();
+        //return _appDbContext.Set<TEntity, TKey>().Where(x => x.Id!.Equals(id)).FirstOrDefault();
 	}
 
     public TEntity Add(TEntity entity)
