@@ -29,10 +29,10 @@ public class ActorRepositoryTest
 	public void GetSingleByID_Returns_ActorWithGivenId()
 	{
 		// Arange
-		Mock<AppDbContext> dbContext = new Mock<AppDbContext>(null, new DbContextOptions<AppDbContext>());
-		DbSet<Actor> dbSet = GetQueryableMockDbSet(new Actor[] { new Actor { FirstName = "Name", Id = 0 }, new Actor { FirstName = "Name2", Id = 1 }, });
+		Mock<IAppDbContext> dbContext = new Mock<IAppDbContext>();
+		Mock<DbSet<Actor>> dbSet = GetQueryableMockDbSet(new Actor[] { new Actor { FirstName = "Name", Id = 0 }, new Actor { FirstName = "Name2", Id = 1 }, });
 
-		dbContext.Setup(s => s.Set<Actor>()).Returns(dbSet);
+		dbContext.Setup(s => s.Set<Actor, int>()).Returns(dbSet.Object);
 
 		ActorRepository repo = new ActorRepository(dbContext.Object);
 		Actor? result;
@@ -50,10 +50,10 @@ public class ActorRepositoryTest
 	public void GetSingleByWrongID_Returns_Null()
 	{
 		// Arange
-		Mock<AppDbContext> dbContext = new Mock<AppDbContext>(null, new DbContextOptions<AppDbContext>());
-		DbSet<Actor> dbSet = GetQueryableMockDbSet(new Actor[] { new Actor { FirstName = "Name", Id = 0 }, new Actor { FirstName = "Name2", Id = 1 }, });
+		Mock<IAppDbContext> dbContext = new Mock<IAppDbContext>();
+		Mock<DbSet<Actor>> dbSet = GetQueryableMockDbSet(new Actor[] { new Actor { FirstName = "Name", Id = 0 }, new Actor { FirstName = "Name2", Id = 1 }, });
 
-		dbContext.Setup(s => s.Set<Actor>()).Returns(dbSet);
+		dbContext.Setup(s => s.Set<Actor, int>()).Returns(dbSet.Object);
 
 		ActorRepository repo = new ActorRepository(dbContext.Object);
 		Actor? result;
@@ -73,9 +73,9 @@ public class ActorRepositoryTest
 		// Arange
 		Mock<AppDbContext> dbContext = new Mock<AppDbContext>(null, new DbContextOptions<AppDbContext>());
 		List<Actor> elements = new List<Actor>{ new Actor { FirstName = "Name", Id = 0 }, new Actor { FirstName = "Name2", Id = 1 }, };
-		DbSet<Actor> dbSet = GetQueryableMockDbSet(elements.ToArray());
+		Mock<DbSet<Actor>> dbSet = GetQueryableMockDbSet(elements.ToArray());
 
-		dbContext.Setup(s => s.Set<Actor>()).Returns(dbSet);
+		dbContext.Setup(s => s.Set<Actor>()).Returns(dbSet.Object);
 
 		ActorRepository repo = new ActorRepository(dbContext.Object);
 		List<Actor>? result;
@@ -94,9 +94,9 @@ public class ActorRepositoryTest
 		// Arange
 		Mock<AppDbContext> dbContext = new Mock<AppDbContext>(null, new DbContextOptions<AppDbContext>());
 		List<Actor> elements = new List<Actor>();
-		DbSet<Actor> dbSet = GetQueryableMockDbSet(elements.ToArray());
+		Mock<DbSet<Actor>> dbSet = GetQueryableMockDbSet(elements.ToArray());
 
-		dbContext.Setup(s => s.Set<Actor>()).Returns(dbSet);
+		dbContext.Setup(s => s.Set<Actor>()).Returns(dbSet.Object);
 
 		ActorRepository repo = new ActorRepository(dbContext.Object);
 		List<Actor>? result;
@@ -110,7 +110,36 @@ public class ActorRepositoryTest
 	}
 	#endregion
 
-	private static DbSet<T> GetQueryableMockDbSet<T>(params T[] sourceList) where T : class
+	#region Add
+	[Fact]
+	public void Add_Returns_AddedElement_And_AddsElementToDbSet()
+	{
+		// Arange
+		Mock<IAppDbContext> dbContext = new Mock<IAppDbContext>();
+		List<Actor> elements = new List<Actor> { new Actor { FirstName = "Name", Id = 0 }, new Actor { FirstName = "Name2", Id = 1 }, };
+		Actor element = new Actor()
+		{
+			FirstName="Added",
+			Id=2,
+		};
+		Mock<DbSet<Actor>> dbSet = GetQueryableMockDbSet(elements.ToArray());
+
+		dbContext.Setup(s => s.Set<Actor, int>()).Returns(dbSet.Object);
+		dbContext.Setup(s => s.SaveChanges()).Returns(0);
+
+		ActorRepository repo = new ActorRepository(dbContext.Object);
+		Actor? result;
+
+		// Arange
+		result = repo.Add(element);
+
+		// Assert
+		Assert.NotNull(result);
+		Assert.Equal(element, result);
+	}
+	#endregion
+
+	private static Mock<DbSet<T>> GetQueryableMockDbSet<T>(params T[] sourceList) where T : class
 	{
 		var queryable = sourceList.AsQueryable();
 
@@ -120,6 +149,6 @@ public class ActorRepositoryTest
 		dbSet.As<IQueryable<T>>().Setup(m => m.ElementType).Returns(queryable.ElementType);
 		dbSet.As<IQueryable<T>>().Setup(m => m.GetEnumerator()).Returns(() => queryable.GetEnumerator());
 
-		return dbSet.Object;
+		return dbSet;
 	}
 }
