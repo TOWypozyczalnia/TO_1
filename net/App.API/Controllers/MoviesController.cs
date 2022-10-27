@@ -14,39 +14,34 @@ public class MoviesController : BaseController
         _movieRepository = movieRepository;
     }
 
-    [HttpGet]
-    [Route("getall")]
+    [HttpGet("GetAll")]
     public async Task<ActionResult> GetAll()
     {
         return new OkObjectResult(await _movieRepository.GetAllAsync());
     }
 
-    [HttpGet]
-    [Route("getsingle")]
+    [HttpGet("{id}")]
     public async Task<ActionResult> GetSingle(int Id)
     {
         CancellationToken cancellation = CancellationToken.None;
         return new OkObjectResult(await _movieRepository.GetSingle(Id, cancellation));
     }
 
-    [Route("add")]
-    [HttpPost]
+    [HttpPost("AddMovie")]
     public async Task<IActionResult> AddMovie([FromBody] Movie Movie)
     {
         Movie temp = _movieRepository.Add(Movie);
         return Ok(temp);
     }
 
-    [Route("update")]
-    [HttpPost]
+    [HttpPost("Update")]
     public async Task<IActionResult> Update(Movie Movie)
     {
         Movie temp = _movieRepository.Update(Movie);
         return Ok(temp);
     }
 
-    [Route("remove")]
-    [HttpPost]
+    [HttpPost("Remove")]
     public async Task<IActionResult> Remove(Movie Movie)
     {
         Movie temp = _movieRepository.Remove(Movie);
