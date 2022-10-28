@@ -60,7 +60,7 @@ namespace App.Test.Controllers
             //Act
             var result = await controller.AddActor(actor);
             //Assert
-            Assert.IsType<OkObjectResult>(result);
+            Assert.IsType<OkResult>(result);
 
         }
 
@@ -75,7 +75,7 @@ namespace App.Test.Controllers
             //Act
             var result = await controller.Remove(actor);
             //Assert
-            Assert.IsType<OkObjectResult>(result);
+            Assert.IsType<OkResult>(result);
         }
 
         [Fact]
@@ -87,7 +87,7 @@ namespace App.Test.Controllers
             //Act
             var result = await controller.Update(actor);
             //Assert
-            Assert.IsType<OkObjectResult>(result);
+            Assert.IsType<OkResult>(result);
         }
 
     }

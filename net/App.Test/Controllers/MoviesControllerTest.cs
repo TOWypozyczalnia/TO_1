@@ -60,7 +60,7 @@ namespace App.Test.Controllers
             //Act
             var result = await controller.AddMovie(movie);
             //Assert
-            Assert.IsType<OkObjectResult>(result);
+            Assert.IsType<OkResult>(result);
         }
 
 
@@ -74,7 +74,7 @@ namespace App.Test.Controllers
             //Act
             var result = await controller.Remove(movie);
             //Assert
-            Assert.IsType<OkObjectResult>(result);
+            Assert.IsType<OkResult>(result);
         }
 
         [Fact]
@@ -86,7 +86,7 @@ namespace App.Test.Controllers
             //Act
             var result = await controller.Update(movie);
             //Assert
-            Assert.IsType<OkObjectResult>(result);
+            Assert.IsType<OkResult>(result);
         }
 
     }

@@ -60,7 +60,7 @@ namespace App.Test.Controllers
             //Act
             var result = await controller.AddDirector(director);
             //Assert
-            Assert.IsType<OkObjectResult>(result);
+            Assert.IsType<OkResult>(result);
         }
 
 
@@ -74,7 +74,7 @@ namespace App.Test.Controllers
             //Act
             var result = await controller.Remove(director);
             //Assert
-            Assert.IsType<OkObjectResult>(result);
+            Assert.IsType<OkResult>(result);
         }
 
         [Fact]
@@ -86,7 +86,7 @@ namespace App.Test.Controllers
             //Act
             var result = await controller.Update(director);
             //Assert
-            Assert.IsType<OkObjectResult>(result);
+            Assert.IsType<OkResult>(result);
         }
 
     }
