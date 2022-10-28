@@ -34,20 +34,20 @@ namespace App.API.Controllers
         [HttpPost("AddActor")]
         public async Task<IActionResult>AddActor([FromBody] Actor actor)
         {
-            Actor temp = actorRepository.Add(actor);
-            return Ok(temp);
+            actorRepository.Add(actor);
+            return Ok();
         }
         [HttpPost("Update")]
         public async Task<IActionResult> Update([FromBody] Actor actor)
         {
-            Actor temp = actorRepository.Update(actor);
-            return Ok(temp);
+            actorRepository.Update(actor);
+            return Ok();
         }
         [HttpPost("Remove")]
         public async Task<IActionResult> Remove([FromBody] Actor actor)
         {
-            Actor temp = actorRepository.Remove(actor);
-            return Ok(temp);
+           actorRepository.Remove(actor);
+            return Ok();
         }
         
     }
