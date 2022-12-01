@@ -12,7 +12,10 @@ public static class DependencyInjection
     {
         return services
             .AddScoped<IActorRepository, ActorRepository>()
-            .AddDbContext<AppDbContext>(options => 
+            .AddScoped<IMovieRepository, MovieRepository>()
+            .AddScoped<IDirectorRepository, DirectorRepository>()
+			.AddScoped<IReviewRepository, ReviewRepository>()
+			.AddDbContext<AppDbContext>(options => 
                 options.UseSqlServer(configuration["Data:AppConnection:ConnectionString"]))
             .AddScoped<IAppDbContext>(provider => provider.GetService<AppDbContext>());
     }
