@@ -1,14 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using App.Data.Repositories;
-using App.Data.Entities;
+﻿using App.Data.Entities;
 using App.Data.Interfaces;
+
+using Microsoft.AspNetCore.Mvc;
+
 //using Microsoft.AspNetCore.Mvc.HttpGet;
-using Microsoft.AspNetCore.Components.Forms;
-using System;
 
 namespace App.API.Controllers
 {
-
     public class ActorController : BaseController
     {
         private readonly IActorRepository actorRepository;
@@ -17,8 +15,7 @@ namespace App.API.Controllers
         {
             this.actorRepository = actorRepository;
         }
-        
-        
+
         [HttpGet("GetAll")]
         public async Task<ActionResult> GetAll()
         {
@@ -29,26 +26,28 @@ namespace App.API.Controllers
         public async Task<ActionResult> GetSingle(int Id)
         {
             CancellationToken cancellation = CancellationToken.None;
-            return new OkObjectResult(await actorRepository.GetSingle(Id,cancellation));
+            return new OkObjectResult(await actorRepository.GetSingle(Id, cancellation));
         }
+
         [HttpPost("AddActor")]
-        public async Task<IActionResult>AddActor([FromBody] Actor actor)
+        public async Task<IActionResult> AddActor([FromBody] Actor actor)
         {
             actorRepository.Add(actor);
             return Ok();
         }
+
         [HttpPost("Update")]
         public async Task<IActionResult> Update([FromBody] Actor actor)
         {
             actorRepository.Update(actor);
             return Ok();
         }
+
         [HttpPost("Remove")]
         public async Task<IActionResult> Remove([FromBody] Actor actor)
         {
-           actorRepository.Remove(actor);
+            actorRepository.Remove(actor);
             return Ok();
         }
-        
     }
 }

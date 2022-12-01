@@ -1,7 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+﻿using App.Data.Entities;
 using App.Data.Interfaces;
-using App.Data.Entities;
+
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 #pragma warning restore format
 
@@ -18,7 +19,8 @@ public class AppDbContext : DbContext, IAppDbContext
     public DbSet<Actor> Actor { get; set; }
     public DbSet<Movie> Movie { get; set; }
     public DbSet<Director> Director { get; set; }
-
+    public DbSet<LoggedUser> LoggedUser { get; set; }
+    public DbSet<Review> Review { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder options)
     {

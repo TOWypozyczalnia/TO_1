@@ -1,6 +1,6 @@
 using App.Data.Entities;
 using App.Data.Interfaces;
-using Microsoft.AspNetCore;
+
 using Microsoft.AspNetCore.Mvc;
 
 namespace App.API.Controllers;
