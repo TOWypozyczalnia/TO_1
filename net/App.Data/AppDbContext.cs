@@ -18,9 +18,10 @@ public class AppDbContext : DbContext, IAppDbContext
     public DbSet<Actor> Actor { get; set; }
     public DbSet<Movie> Movie { get; set; }
     public DbSet<Director> Director { get; set; }
+    public DbSet<Review> Review{ get; set; }
 
 
-    protected override void OnConfiguring(DbContextOptionsBuilder options)
+	protected override void OnConfiguring(DbContextOptionsBuilder options)
     {
         options.UseSqlServer(Configuration["Data:AppConnection:ConnectionString"]);
     }

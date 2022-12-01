@@ -50,6 +50,14 @@ CREATE TABLE [dbo].[DirectorMovie] (
 );
 GO
 
+CREATE TABLE [dbo].[Review] (
+	[Id] INT NOT NULL IDENTITY(1,1),
+	[UserKey] VARCHAR(36) NOT NULL,
+	[MovieId] INT NOT NULL CONSTRAINT FK_Review_Movie REFERENCES dbo.Movie(Id),
+	[Rating] INT NOT NULL,
+    CONSTRAINT [PK_Review] PRIMARY KEY CLUSTERED([Id] ASC)
+);
+
 
 -- CREATE SUPERID
 
