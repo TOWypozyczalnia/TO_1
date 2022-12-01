@@ -1,8 +1,9 @@
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Configuration;
 using App.Data.Interfaces;
 using App.Data.Repositories;
+
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace App.Data;
 
@@ -12,7 +13,11 @@ public static class DependencyInjection
     {
         return services
             .AddScoped<IActorRepository, ActorRepository>()
-            .AddDbContext<AppDbContext>(options => 
+            .AddScoped<IMovieRepository, MovieRepository>()
+            .AddScoped<IDirectorRepository, DirectorRepository>()
+            .AddScoped<ILoggedUserRepository, LoggedUserRepository>()
+            .AddScoped<IReviewRepository, ReviewRepository>()
+            .AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(configuration["Data:AppConnection:ConnectionString"]))
             .AddScoped<IAppDbContext>(provider => provider.GetService<AppDbContext>());
     }

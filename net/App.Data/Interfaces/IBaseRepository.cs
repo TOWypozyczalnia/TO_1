@@ -7,5 +7,4 @@ public interface IBaseRepository<TEntity, TKey> where TEntity : class, IBaseEnti
     void Add(TEntity entity);
     void Update(TEntity entity);
     void Remove(TEntity entity);
-
 }

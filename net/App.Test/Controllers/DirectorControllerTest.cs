@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using App.API.Controllers;
+﻿using App.API.Controllers;
 using App.Data.Entities;
 using App.Data.Interfaces;
+
 using FakeItEasy;
-using Xunit;
+
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Cryptography.X509Certificates;
+
+using Xunit;
 
 namespace App.Test.Controllers
 {
@@ -25,7 +22,6 @@ namespace App.Test.Controllers
         [Fact]
         public async void DirctorController_GetAll_ReturnOk()
         {
-
             //Arrange
             var controller = new DirectorController(_directorRepository);
             //Act
@@ -46,10 +42,7 @@ namespace App.Test.Controllers
 
             //Assert
             Assert.IsType<OkObjectResult>(result);
-
         }
-
-
 
         [Fact]
         public async void DirctorController_AddActor_ReturnOk()
@@ -62,8 +55,6 @@ namespace App.Test.Controllers
             //Assert
             Assert.IsType<OkResult>(result);
         }
-
-
 
         [Fact]
         public async void DirctorController_Remove_ReturnOk()
@@ -88,6 +79,5 @@ namespace App.Test.Controllers
             //Assert
             Assert.IsType<OkResult>(result);
         }
-
     }
 }

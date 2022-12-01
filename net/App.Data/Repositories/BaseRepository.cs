@@ -1,6 +1,5 @@
-using System;
-
 using App.Data.Interfaces;
+
 using Microsoft.EntityFrameworkCore;
 
 namespace App.Data.Repositories;
@@ -16,16 +15,15 @@ public abstract class BaseRepository<TEntity, TKey> : IBaseRepository<TEntity, T
 
     public async Task<ICollection<TEntity>> GetAllAsync()
     {
-        return  await _appDbContext.Set<TEntity, TKey>().AsNoTracking().ToListAsync();
-
-	}
+        return await _appDbContext.Set<TEntity, TKey>().AsNoTracking().ToListAsync();
+    }
 
     public async Task<TEntity> GetSingle(TKey id, CancellationToken cancellationToken)
     {
         return _appDbContext.Set<TEntity, TKey>().AsNoTracking().FirstOrDefault(d => d.Id.Equals(id));
 
         //return _appDbContext.Set<TEntity, TKey>().Where(x => x.Id!.Equals(id)).FirstOrDefault();
-	}
+    }
 
     public void Add(TEntity entity)
     {
@@ -37,11 +35,11 @@ public abstract class BaseRepository<TEntity, TKey> : IBaseRepository<TEntity, T
     {
         var entityEntry = _appDbContext.Set<TEntity, TKey>().Update(entity);
         _appDbContext.SaveChanges();
-	}
+    }
 
     public void Remove(TEntity entity)
     {
         _appDbContext.Set<TEntity, TKey>().Remove(entity);
-		_appDbContext.SaveChanges();
+        _appDbContext.SaveChanges();
     }
 }
