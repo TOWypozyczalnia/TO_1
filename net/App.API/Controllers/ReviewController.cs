@@ -7,7 +7,7 @@ namespace App.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]/")]
-public class ReviewController : BaseController
+public class ReviewController : ControllerBase
 {
 	private readonly IReviewRepository _reviewRepository;
 
