@@ -7,7 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.API", "App.API\App.API.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Data", "App.Data\App.Data.csproj", "{D19E2AA9-A101-4D68-A80A-4BAFD7159B79}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Test", "App.Test\App.Test.csproj", "{319F3256-1140-44CC-B36D-DF9361639B97}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.UnitTest", "App.UnitTest\App.UnitTest.csproj", "{319F3256-1140-44CC-B36D-DF9361639B97}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Service", "App.Service\App.Service.csproj", "{C67B36BA-F04E-4A3E-A162-5995C3AE47BE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,5 +32,9 @@ Global
 		{319F3256-1140-44CC-B36D-DF9361639B97}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{319F3256-1140-44CC-B36D-DF9361639B97}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{319F3256-1140-44CC-B36D-DF9361639B97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C67B36BA-F04E-4A3E-A162-5995C3AE47BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C67B36BA-F04E-4A3E-A162-5995C3AE47BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C67B36BA-F04E-4A3E-A162-5995C3AE47BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C67B36BA-F04E-4A3E-A162-5995C3AE47BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

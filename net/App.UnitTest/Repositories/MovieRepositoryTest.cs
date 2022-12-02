@@ -91,7 +91,7 @@ public class MovieRepositoryTest
         List<Movie>? result;
 
         // Act
-        result = (List<Movie>)repo.GetAllAsync().Result;
+        result = repo.GetAllAsync().ToList();
 
         // Assert
         Assert.Equal(contents, result);
@@ -112,7 +112,7 @@ public class MovieRepositoryTest
         List<Movie>? result;
 
         // Act
-        result = (List<Movie>)repo.GetAllAsync().Result;
+        result = repo.GetAllAsync().ToList();
 
         // Assert
         Assert.Equal(contents, result);

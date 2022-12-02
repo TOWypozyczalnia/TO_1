@@ -6,6 +6,8 @@
     <Nullable>enable</Nullable>
 
     <IsPackable>false</IsPackable>
+
+    <RootNamespace>App.Test</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -24,6 +26,7 @@
   <ItemGroup>
     <ProjectReference Include="..\App.API\App.API.csproj" />
     <ProjectReference Include="..\App.Data\App.Data.csproj" />
+    <ProjectReference Include="..\App.Service\App.Service.csproj" />
   </ItemGroup>
 
   <ItemGroup>

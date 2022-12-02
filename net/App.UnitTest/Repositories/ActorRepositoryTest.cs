@@ -91,7 +91,7 @@ public class ActorRepositoryTest
         List<Actor>? result;
 
         // Act
-        result = (List<Actor>)repo.GetAllAsync().Result;
+        result = repo.GetAllAsync().ToList();
 
         // Assert
         Assert.Equal(contents, result);
@@ -112,7 +112,7 @@ public class ActorRepositoryTest
         List<Actor>? result;
 
         // Act
-        result = (List<Actor>)repo.GetAllAsync().Result;
+        result = repo.GetAllAsync().ToList();
 
         // Assert
         Assert.Equal(contents, result);

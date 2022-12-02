@@ -91,7 +91,7 @@ public class LoggedUserRepositoryTest
         List<LoggedUser>? result;
 
         // Act
-        result = (List<LoggedUser>)repo.GetAllAsync().Result;
+        result = repo.GetAllAsync().ToList();
 
         // Assert
         Assert.Equal(contents, result);
@@ -112,7 +112,7 @@ public class LoggedUserRepositoryTest
         List<LoggedUser>? result;
 
         // Act
-        result = (List<LoggedUser>)repo.GetAllAsync().Result;
+        result = repo.GetAllAsync().ToList();
 
         // Assert
         Assert.Equal(contents, result);
