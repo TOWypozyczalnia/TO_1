@@ -1,4 +1,5 @@
 using App.Data;
+using App.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.ConfigureDatabaseConnection(builder.Configuration);
+builder.Services.AddServices();
 
 var app = builder.Build();
 

@@ -10,4 +10,10 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\..\..\..\..\.nuget\packages\entityframework\6.4.4\lib\netstandard2.1\EntityFramework.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
