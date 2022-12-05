@@ -11,7 +11,7 @@ using Xunit;
 
 namespace App.Test.Services
 {
-    public class RecommendationServiceTest
+    public class RandomMovieServiceTest
     {
         [Fact]
         public void DrawMovieTest()
