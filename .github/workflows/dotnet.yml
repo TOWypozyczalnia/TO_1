@@ -12,6 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+    - name: Build database image
+      run: docker build ./database -t to_mssql -f ./docker/database/Dockerfile
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
