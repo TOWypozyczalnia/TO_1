@@ -59,10 +59,18 @@ CREATE TABLE [dbo].[LoggedUser] (
 );
 GO
 
-CREATE TABLE [dbo].[LoggedUserMovie] (
+CREATE TABLE [dbo].[Review] (
+    [Id] INT NOT NULL IDENTITY(1,1),
     [UserId] INT NOT NULL CONSTRAINT FK_Review_LoggedUser REFERENCES dbo.LoggedUser(Id),
     [MovieId] INT NOT NULL CONSTRAINT FK_Review_Movie REFERENCES dbo.Movie(Id),
-    CONSTRAINT [PK_Review] PRIMARY KEY CLUSTERED([UserId] ASC, [MovieId] ASC)
+    [Rating] INT NOT NULL,
+    CONSTRAINT [PK_Review] PRIMARY KEY CLUSTERED([Id] ASC)
+);
+
+CREATE TABLE [dbo].[LoggedUserMovie] (
+    [UserId] INT NOT NULL CONSTRAINT FK_LoggedUserMovie_LoggedUser REFERENCES dbo.LoggedUser(Id),
+    [MovieId] INT NOT NULL CONSTRAINT FK_LoggedUserMovie_Movie REFERENCES dbo.Movie(Id),
+    CONSTRAINT [PK_LoggedUserMovie] PRIMARY KEY CLUSTERED([UserId] ASC, [MovieId] ASC)
 );
 GO
 
