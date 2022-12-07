@@ -15,7 +15,7 @@ jobs:
     - name: Build database image
       run: docker build ./database -t to_mssql -f ./docker/database/Dockerfile.ci
     - name: Run container with database
-      run: docker run -p 1433:1433 to_mssql
+      run: docker run -d -p 1433:1433 to_mssql
     - name: Wait for database
       run: chmod +x tools/unix/await.sh && ./tools/unix/await.sh
     - name: Setup .NET
