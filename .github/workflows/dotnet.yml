@@ -13,7 +13,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build database image
-      run: docker build ./database -t to_mssql -f ./docker/database/Dockerfile
+      run: docker build ./database -t to_mssql -f ./docker/database/Dockerfile.ci
     - name: Run container with database
       run: docker run -p 1433:1433 to_mssql
     - name: Wait for database
