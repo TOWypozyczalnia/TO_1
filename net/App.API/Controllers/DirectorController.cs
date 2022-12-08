@@ -17,7 +17,7 @@ public class DirectorController : BaseController
     [HttpGet("GetAll")]
     public async Task<ActionResult> GetAll()
     {
-        return new OkObjectResult(await _directorRepository.GetAllAsync());
+        return new OkObjectResult(_directorRepository.GetAllAsync());
     }
 
     [HttpGet("{id}")]

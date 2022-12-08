@@ -21,6 +21,8 @@ public class AppDbContext : DbContext, IAppDbContext
     public DbSet<Director> Director { get; set; }
     public DbSet<LoggedUser> LoggedUser { get; set; }
     public DbSet<Review> Review { get; set; }
+    public DbSet<UserSimilarity> UserSimilarity { get; set; }
+    public DbSet<LoggedUserMovie> LoggedUserMovie { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder options)
     {
@@ -29,6 +31,7 @@ public class AppDbContext : DbContext, IAppDbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<LoggedUserMovie>().HasKey(lum => new { lum.UserId, lum.MovieId });
     }
 
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())

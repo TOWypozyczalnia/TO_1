@@ -19,7 +19,7 @@ namespace App.API.Controllers
         [HttpGet("GetAll")]
         public async Task<ActionResult> GetAll()
         {
-            return new OkObjectResult(await actorRepository.GetAllAsync());
+            return new OkObjectResult(actorRepository.GetAllAsync());
         }
 
         [HttpGet("{id}")]

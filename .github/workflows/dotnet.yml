@@ -12,6 +12,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+    - name: Build database image
+      run: docker build ./database -t to_mssql -f ./docker/database/Dockerfile.ci
+    - name: Run container with database
+      run: docker run -d -p 1433:1433 to_mssql
+    - name: Wait for database
+      run: chmod +x tools/unix/await.sh && ./tools/unix/await.sh
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
@@ -21,4 +27,4 @@ jobs:
     - name: Build
       run: dotnet build -c Release --no-restore net
     - name: Test
-      run: dotnet test -c Release --no-build --verbosity normal net
+      run: dotnet test --environment Test -c Release --no-build --verbosity normal net/App.UnitTest

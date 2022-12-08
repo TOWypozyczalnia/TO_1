@@ -91,7 +91,7 @@ public class DirectorRepositoryTest
         List<Director>? result;
 
         // Act
-        result = (List<Director>)repo.GetAllAsync().Result;
+        result = repo.GetAllAsync().ToList();
 
         // Assert
         Assert.Equal(contents, result);
@@ -112,7 +112,7 @@ public class DirectorRepositoryTest
         List<Director>? result;
 
         // Act
-        result = (List<Director>)repo.GetAllAsync().Result;
+        result = repo.GetAllAsync().ToList();
 
         // Assert
         Assert.Equal(contents, result);

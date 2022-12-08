@@ -8,4 +8,7 @@ COPY ./ ./
 
 RUN chmod +x entrypoint.sh init-db.sh
 
+ENV SA_PASSWORD=Your_password123
+ENV ACCEPT_EULA=Y
+
 CMD ["/bin/bash", "entrypoint.sh"]

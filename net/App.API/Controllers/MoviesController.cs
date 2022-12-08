@@ -1,6 +1,6 @@
 using App.Data.Entities;
 using App.Data.Interfaces;
-
+using App.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace App.API.Controllers;
@@ -8,16 +8,18 @@ namespace App.API.Controllers;
 public class MoviesController : BaseController
 {
     private readonly IMovieRepository _movieRepository;
+    private readonly IRecommendationSerivce _recommendationService;
 
-    public MoviesController(IMovieRepository movieRepository)
+    public MoviesController(IMovieRepository movieRepository, IRecommendationSerivce recommendationService)
     {
         _movieRepository = movieRepository;
+        _recommendationService = recommendationService;
     }
 
     [HttpGet("GetAll")]
     public async Task<ActionResult> GetAll()
     {
-        return new OkObjectResult(await _movieRepository.GetAllAsync());
+        return new OkObjectResult(_movieRepository.GetAllAsync());
     }
 
     [HttpGet("{id}")]
@@ -46,5 +48,11 @@ public class MoviesController : BaseController
     {
         _movieRepository.Remove(Movie);
         return Ok();
+    }
+
+    [HttpGet("Recommended/{userId}")]
+    public IActionResult GetRecommended(int userId)
+    {
+        return new OkObjectResult(_recommendationService.GetRandomRecommendation(userId));
     }
 }

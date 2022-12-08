@@ -91,7 +91,7 @@ public class ReviewRepositoryTest
         List<Review>? result;
 
         // Act
-        result = (List<Review>)repo.GetAllAsync().Result;
+        result = repo.GetAllAsync().ToList();
 
         // Assert
         Assert.Equal(contents, result);
@@ -112,7 +112,7 @@ public class ReviewRepositoryTest
         List<Review>? result;
 
         // Act
-        result = (List<Review>)repo.GetAllAsync().Result;
+        result = repo.GetAllAsync().ToList();
 
         // Assert
         Assert.Equal(contents, result);

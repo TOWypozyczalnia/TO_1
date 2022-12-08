@@ -7,7 +7,7 @@ GO
 USE movies;
 GO
 
--- CREATE TABLES
+-- tables
 
 CREATE TABLE [dbo].[Movie] (
     [Id] INT NOT NULL IDENTITY(1, 1),
@@ -67,9 +67,64 @@ CREATE TABLE [dbo].[Review] (
     CONSTRAINT [PK_Review] PRIMARY KEY CLUSTERED([Id] ASC)
 );
 
+CREATE TABLE [dbo].[LoggedUserMovie] (
+    [UserId] INT NOT NULL CONSTRAINT FK_LoggedUserMovie_LoggedUser REFERENCES dbo.LoggedUser(Id),
+    [MovieId] INT NOT NULL CONSTRAINT FK_LoggedUserMovie_Movie REFERENCES dbo.Movie(Id),
+    CONSTRAINT [PK_LoggedUserMovie] PRIMARY KEY CLUSTERED([UserId] ASC, [MovieId] ASC)
+);
+GO
 
--- CREATE SUPERID
+-- functions
 
--- yyyyMMddhhmmss
+IF EXISTS (SELECT * FROM sysobjects WHERE id = object_id('fntGetUserSimilarites') AND xtype IN ('FN', 'IF', 'TF'))
+	DROP FUNCTION [dbo].[fntGetUserSimilarites]
+GO
 
 
+CREATE FUNCTION [dbo].[fntGetUserSimilarites] (@userId INT)
+RETURNS @T TABLE(UserId INT, Count INT)
+AS
+BEGIN
+  DECLARE @SimilaritiesCount TABLE (UserId INT, MovieId INT);
+  DECLARE @CurrentUserId INT;
+  DECLARE UserMovieCursor CURSOR FOR
+  SELECT
+    Id
+  FROM dbo.LoggedUser;
+
+  OPEN UserMovieCursor;
+  FETCH NEXT FROM UserMovieCursor INTO @CurrentUserId;
+
+  WHILE @@FETCH_STATUS = 0
+  BEGIN
+    IF (@UserId != @CurrentUserId)
+    BEGIN
+      INSERT INTO @SimilaritiesCount
+      SELECT
+        @CurrentUserId AS UserId,
+        MovieId
+      FROM (
+        SELECT
+          MovieId
+        FROM dbo.LoggedUserMovie
+        WHERE UserId = @CurrentUserId
+        INTERSECT
+        SELECT
+          MovieId
+        FROM dbo.LoggedUserMovie
+        WHERE UserId = @userId
+      ) Counter
+    END
+    FETCH NEXT FROM UserMovieCursor INTO @CurrentUserId;
+  END
+
+  INSERT INTO @T
+  SELECT 
+    UserId,
+    Count(MovieId) AS Count 
+  FROM @SimilaritiesCount
+  GROUP BY UserId;
+
+  RETURN
+END
+GO
