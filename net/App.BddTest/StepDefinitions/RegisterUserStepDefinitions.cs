@@ -11,7 +11,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace App.BddTest.StepDefinitions
 {
-    [Binding]
+    [Binding, Scope(Feature = "RegisterUser")]
     public class RegisterUserStepDefinitions
     {
         private IConfigurationBuilder config = new ConfigurationBuilder().AddJsonFile("appsettings-Test.json");
@@ -61,9 +61,27 @@ namespace App.BddTest.StepDefinitions
         [Then(@"LoggedUser table contains new record")]
         public void ThenLoggedUserTableContainsNewRecord()
         {
-            userForCleanUp = userRepo.GetAllAsync().ToList().Last();
+            userForCleanUp = userRepo.GetAllAsync().ToList().Where(u => u.UserKey == key).ToList()!.First();
             Assert.Equal(key, userForCleanUp.UserKey);
         }
+
+        [When(@"I make POST request to /api/User/Register with body containing wrong data")]
+        public void WhenIMakePOSTRequestToApiUserRegisterWithBodyContainingWrongData()
+        {
+            WebApplicationFactory<Program> factory = new();
+            HttpClient client = factory.CreateClient();
+
+            string jsonData = "";
+            HttpContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+            response = client.PostAsync("/api/User/Register", content).Result;
+        }
+
+        [Then(@"The response status code is BadRequest")]
+        public void ThenTheResponseStatusCodeIsBadRequest()
+        {
+            Assert.Equal(System.Net.HttpStatusCode.BadRequest, response.StatusCode);
+        }
+
 
         [AfterScenario]
         public void Cleanup()

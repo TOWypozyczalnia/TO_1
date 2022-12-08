@@ -8,9 +8,7 @@ Scenario: User registers correctly
 	And The response contains user key
     And LoggedUser table contains new record
 
-#@bad
-#Scenario: User registers incorrectly
-#	Given I am user
-#	And Movie repository contains records
-#	When I make POST request to /api/Reservation/AddReservation with body containing Reservation in wrong format
-#	Then The response status code is BadRequest
+@bad
+Scenario: User registers incorrectly
+	When I make POST request to /api/User/Register with body containing wrong data
+    Then The response status code is BadRequest
