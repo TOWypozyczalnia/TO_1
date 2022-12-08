@@ -9,10 +9,10 @@ using App.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
-namespace MovieDetailIntegrationTest.StepDefinitions
+namespace App.BddDetailsTest.StepDefinitions
 {
     [Binding]
-    public class GetDatailsStepDefinitions
+    public class GetDetailsStepDefinitions
     {
         private IConfigurationBuilder config = new ConfigurationBuilder().AddJsonFile("appsettings-Test.json");
         private DbContextOptions<AppDbContext> options = new();
