@@ -6,6 +6,7 @@ using App.Data.Entities;
 using App.Data.Interfaces;
 using App.Data.Repositories;
 
+using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -59,22 +60,25 @@ namespace App.BddTest.StepDefinitions
         public void GivenIAmUser()
         {
             userRepo.Add(testUser);
+            testReview.UserId = testUser.Id;
         }
 
         [Given(@"Movie repository contains records")]
         public void GivenMovieRepositoryContainsRecords()
         {
             movieRepo.Add(testMovie);
+            testReview.MovieId = testMovie.Id;
         }
 
         [When(@"I make POST request to /api/Review/AddReview with body containing Review in json format")]
         public void WhenIMakePOSTRequestToApiReviewAddReviewWithBodyContainingReviewInJsonFormat()
         {
-            HttpClient client = new();
+            WebApplicationFactory<Program> factory = new();
+            HttpClient client = factory.CreateClient();
 
             string jsonData = JsonSerializer.Serialize(testReview).Remove(2, 7);    // Remove Id from json
             HttpContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            response = client.PostAsync("http://localhost:8081/api/Review/AddReview", content).Result;
+            response = client.PostAsync("/api/Review/AddReview", content).Result;
         }
 
         [Then(@"The response status code is OK")]
@@ -96,10 +100,9 @@ namespace App.BddTest.StepDefinitions
         [AfterScenario]
         public void Cleanup()
         {
-            // Only works if there are already records in table. Otherwise there's problem with ForeignKeys
-            //userRepo.Remove(testUser);
-            //movieRepo.Remove(testMovie);
-            //reviewRepo.Remove(reviewForCleanUp);
+            reviewRepo.Remove(reviewForCleanUp);
+            userRepo.Remove(testUser);
+            movieRepo.Remove(testMovie);
         }
     }
 }
