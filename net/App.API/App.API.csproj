@@ -19,4 +19,8 @@
     <ProjectReference Include="..\App.Service\App.Service.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <InternalsVisibleTo Include="App.BddTest"/>
+  </ItemGroup>
+
 </Project>

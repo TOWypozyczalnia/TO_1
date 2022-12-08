@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
     <PackageReference Include="SpecFlow.xUnit" Version="3.9.74" />
@@ -29,11 +30,11 @@
 
   <ItemGroup>
     <Folder Include="Drivers\" />
-    <Folder Include="StepDefinitions\" />
     <Folder Include="Support\" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\App.API\App.API.csproj" />
     <ProjectReference Include="..\App.Data\App.Data.csproj" />
     <ProjectReference Include="..\App.Service\App.Service.csproj" />
   </ItemGroup>
