@@ -97,10 +97,30 @@ namespace App.BddTest.StepDefinitions
             Assert.Equal(expected.Rating, testReview.Rating);
         }
 
+        [When(@"I make POST request to /api/Review/AddReview with body containing Review in wrong format")]
+        public void WhenIMakePOSTRequestToApiReviewAddReviewWithBodyContainingReviewInWrongFormat()
+        {
+            WebApplicationFactory<Program> factory = new();
+            HttpClient client = factory.CreateClient();
+
+            string jsonData = "{\"Garbage\"}";
+            HttpContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+            response = client.PostAsync("/api/Review/AddReview", content).Result;
+        }
+
+        [Then(@"The response status code is BadRequest")]
+        public void ThenTheResponseStatusCodeIsBadRequest()
+        {
+            Assert.Equal(System.Net.HttpStatusCode.BadRequest, response.StatusCode);
+        }
+
         [AfterScenario]
         public void Cleanup()
         {
-            reviewRepo.Remove(reviewForCleanUp);
+            if (reviewForCleanUp != null)
+            {
+                reviewRepo.Remove(reviewForCleanUp);
+            }
             userRepo.Remove(testUser);
             movieRepo.Remove(testMovie);
         }
