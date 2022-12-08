@@ -23,10 +23,9 @@ namespace App.Test.Services
             //Act
             
             movies.Add(movieToList);
-            Movie movieResult = randomMovieService.DrawMovie();
-            Assert.Equal(movieResult, movieToList);
+            Movie movieResult = randomMovieService.DrawMovie(movies);
             //Assert
-
+            Assert.Equal(movieResult, movieToList);
         }
        
     }

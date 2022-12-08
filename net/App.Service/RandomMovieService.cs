@@ -11,20 +11,7 @@ namespace App.Service
 {
     public class RandomMovieService
     {
-        private readonly IMovieRepository _movieRepository;
-        public Movie DrawMovie()
-        {
-            List<Movie> movies = MoviesList();
-            return DrawMovieFromList(movies);
-        }
-
-        private List<Movie> MoviesList()
-        {
-            _movieRepository.GetAllAsync();
-            return new List<Movie>();
-        }
-
-        private Movie DrawMovieFromList(List<Movie>movies)
+        public Movie DrawMovie(List<Movie>movies)
         {
             Random random = new Random();
             if (movies.Count == 0) return null;
