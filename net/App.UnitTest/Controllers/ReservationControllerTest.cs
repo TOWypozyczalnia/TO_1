@@ -34,22 +34,5 @@ namespace App.Test.Controllers
             //Assert
             Assert.IsType<OkResult>(result);
         }
-
-        [Fact]
-        public async void ReservationController_AddReservationWithInvalidMovieId_ReturnBadRequest()
-        {
-            //Arrange
-            Mock<IReservationRepository> reservationRepository = new();
-            Reservation reservation = new() { MovieId = 2 };
-            reservationRepository.Setup(r => r.Add(reservation)).Throws(new Microsoft.EntityFrameworkCore.DbUpdateException());
-
-            ReservationController controller = new(reservationRepository.Object);
-
-            //Act
-            IActionResult result = await controller.AddReservation(reservation);
-
-            //Assert
-            Assert.IsType<BadRequestObjectResult>(result);
-        }
     }
 }

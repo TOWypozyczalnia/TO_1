@@ -1,14 +1,14 @@
-using System;
+using System.Text;
+using System.Text.Json;
+
+using App.Data;
 using App.Data.Entities;
 using App.Data.Interfaces;
 using App.Data.Repositories;
-using App.Data;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 using Microsoft.AspNetCore.Mvc.Testing;
-using System.Text;
-using System.Text.Json;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace App.BddTest.StepDefinitions
 {
@@ -82,7 +82,6 @@ namespace App.BddTest.StepDefinitions
             response = client.PostAsync("/api/Reservation/AddReservation", content).Result;
         }
 
-
         [Then(@"The response status code is OK")]
         public void ThenTheResponseStatusCodeIsOK()
         {
@@ -101,10 +100,30 @@ namespace App.BddTest.StepDefinitions
             //Assert.Equal(expected.ExpirationDate, testReservation.ExpirationDate);
         }
 
+        [When(@"I make POST request to /api/Reservation/AddReservation with body containing Reservation in wrong format")]
+        public void WhenIMakePOSTRequestToApiReservationAddReservationWithBodyContainingReservationInWrongFormat()
+        {
+            WebApplicationFactory<Program> factory = new();
+            HttpClient client = factory.CreateClient();
+
+            string jsonData = "{\"Garbage\"}";
+            HttpContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+            response = client.PostAsync("/api/Reservation/AddReservation", content).Result;
+        }
+
+        [Then(@"The response status code is BadRequest")]
+        public void ThenTheResponseStatusCodeIsBadRequest()
+        {
+            Assert.Equal(System.Net.HttpStatusCode.BadRequest, response.StatusCode);
+        }
+
         [AfterScenario]
         public void Cleanup()
         {
-            reservationRepo.Remove(reservationForCleanUp);
+            if (reservationForCleanUp != null)
+            {
+                reservationRepo.Remove(reservationForCleanUp);
+            }
             userRepo.Remove(testUser);
             movieRepo.Remove(testMovie);
         }
