@@ -30,6 +30,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Controllers\ReservationControllerTest.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
     <Compile Update="Controllers\ReviewControllerTest.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
