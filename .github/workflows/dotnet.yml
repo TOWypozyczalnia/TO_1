@@ -27,4 +27,4 @@ jobs:
     - name: Build
       run: dotnet build -c Release --no-restore net
     - name: Test
-      run: dotnet test --environment Test -c Release --no-build --verbosity normal net/App.UnitTest
+      run: dotnet test --environment Test -c Release --no-build --verbosity normal net
