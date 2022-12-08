@@ -9,6 +9,7 @@ namespace App.Service
 {
     public class RandomMovieService
     {
+
         public Movie DrawMovie(List<Movie>movies)
         {
             Random random = new Random();
