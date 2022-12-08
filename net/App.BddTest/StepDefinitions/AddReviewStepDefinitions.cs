@@ -16,14 +16,16 @@ namespace App.BddTest.StepDefinitions
     [Binding, Scope(Feature = "AddReview")]
     public class AddReviewStepDefinitions
     {
-        private IConfigurationBuilder config = new ConfigurationBuilder().AddJsonFile("appsettings-Test.json");
-        private DbContextOptions<AppDbContext> options = new();
+        private static IConfigurationBuilder config = new ConfigurationBuilder().AddJsonFile("appsettings-Test.json");
+        private static DbContextOptions<AppDbContext> options = new();
+                 
+        private static AppDbContext dbContext;
 
-        private AppDbContext dbContext;
+        private static IMovieRepository movieRepo;
+        private static ILoggedUserRepository userRepo;
+        private static IReviewRepository reviewRepo;
 
-        private IMovieRepository movieRepo;
-        private ILoggedUserRepository userRepo;
-        private IReviewRepository reviewRepo;
+        private static HttpClient client;
 
         private readonly Movie testMovie = new()
         {
@@ -47,14 +49,17 @@ namespace App.BddTest.StepDefinitions
 
         private HttpResponseMessage response;
 
-        [BeforeScenario]
-        public void Setup()
+        [BeforeFeature]
+        public static void Setup()
         {
             dbContext = new(config.Build(), options);
 
             movieRepo = new MovieRepository(dbContext);
             userRepo = new LoggedUserRepository(dbContext);
             reviewRepo = new ReviewRepository(dbContext);
+
+            WebApplicationFactory<Program> factory = new WebApplicationFactory<Program>().WithWebHostBuilder(b => b.UseEnvironment("Test"));
+            client = factory.CreateClient();
         }
 
         [Given(@"I am user")]
@@ -74,9 +79,6 @@ namespace App.BddTest.StepDefinitions
         [When(@"I make POST request to /api/Review/AddReview with body containing Review in json format")]
         public void WhenIMakePOSTRequestToApiReviewAddReviewWithBodyContainingReviewInJsonFormat()
         {
-            WebApplicationFactory<Program> factory = new WebApplicationFactory<Program>().WithWebHostBuilder(b => b.UseEnvironment("Test"));
-            HttpClient client = factory.CreateClient();
-
             string jsonData = JsonSerializer.Serialize(testReview).Remove(2, 7);    // Remove Id from json
             HttpContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
             response = client.PostAsync("/api/Review/AddReview", content).Result;
@@ -101,9 +103,6 @@ namespace App.BddTest.StepDefinitions
         [When(@"I make POST request to /api/Review/AddReview with body containing Review in wrong format")]
         public void WhenIMakePOSTRequestToApiReviewAddReviewWithBodyContainingReviewInWrongFormat()
         {
-            WebApplicationFactory<Program> factory = new WebApplicationFactory<Program>().WithWebHostBuilder(b => b.UseEnvironment("Test"));
-            HttpClient client = factory.CreateClient();
-
             string jsonData = "{\"Garbage\"}";
             HttpContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
             response = client.PostAsync("/api/Review/AddReview", content).Result;

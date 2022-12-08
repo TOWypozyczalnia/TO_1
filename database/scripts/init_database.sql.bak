@@ -14,7 +14,7 @@ CREATE TABLE [dbo].[Movie] (
     [Name] VARCHAR(100) NOT NULL,
     [ProductionYear] DATETIME NOT NULL,
     [BoxOffice] INT NOT NULL,
-    [Unavailable] INT,
+	[Unavailable] INT,
     CONSTRAINT [PK_Movie] PRIMARY KEY CLUSTERED([Id] ASC)
 );
 
