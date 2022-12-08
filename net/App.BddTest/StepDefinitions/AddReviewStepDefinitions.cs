@@ -97,9 +97,7 @@ namespace App.BddTest.StepDefinitions
         public void Cleanup()
         {
             // Only works if there are already records in table. Otherwise there's problem with ForeignKeys
-            //userRepo.Remove(testUser);
             //movieRepo.Remove(testMovie);
-            //reviewRepo.Remove(reviewForCleanUp);
         }
     }
 }

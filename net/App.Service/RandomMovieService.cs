@@ -1,4 +1,6 @@
 ﻿using App.Data.Entities;
+using App.Data.Interfaces;
+using App.Data.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +11,20 @@ namespace App.Service
 {
     public class RandomMovieService
     {
-        
-        public Movie DrawMovie(List<Movie>movies)
+        private readonly IMovieRepository _movieRepository;
+        public Movie DrawMovie()
+        {
+            List<Movie> movies = MoviesList();
+            return DrawMovieFromList(movies);
+        }
+
+        private List<Movie> MoviesList()
+        {
+            _movieRepository.GetAllAsync();
+            return new List<Movie>();
+        }
+
+        private Movie DrawMovieFromList(List<Movie>movies)
         {
             Random random = new Random();
             if (movies.Count == 0) return null;
