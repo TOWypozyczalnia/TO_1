@@ -19,7 +19,7 @@ namespace App.BddTest.Features
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.9.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public partial class AddReviewFeature : object, Xunit.IClassFixture<AddReviewFeature.FixtureData>, System.IDisposable
+    public partial class AddReservationFeature : object, Xunit.IClassFixture<AddReservationFeature.FixtureData>, System.IDisposable
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
@@ -28,10 +28,10 @@ namespace App.BddTest.Features
         
         private Xunit.Abstractions.ITestOutputHelper _testOutputHelper;
         
-#line 1 "AddReview.feature"
+#line 1 "AddReservation.feature"
 #line hidden
         
-        public AddReviewFeature(AddReviewFeature.FixtureData fixtureData, App_BddTest_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
+        public AddReservationFeature(AddReservationFeature.FixtureData fixtureData, App_BddTest_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
         {
             this._testOutputHelper = testOutputHelper;
             this.TestInitialize();
@@ -40,8 +40,8 @@ namespace App.BddTest.Features
         public static void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "AddReview", "// Jako użytkownik chcę ocenić film, żeby proponowane mi filmy w przyszłości lepi" +
-                    "ej spełniały moje oczekiwania", ProgrammingLanguage.CSharp, featureTags);
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "AddReservation", "// Jako użytkownik chcę zarezerwować film, żeby móc go później wypożyczyć w placó" +
+                    "wce wypożyczalni.", ProgrammingLanguage.CSharp, featureTags);
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -81,16 +81,16 @@ namespace App.BddTest.Features
             this.TestTearDown();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="User adds review correctly")]
-        [Xunit.TraitAttribute("FeatureTitle", "AddReview")]
-        [Xunit.TraitAttribute("Description", "User adds review correctly")]
+        [Xunit.SkippableFactAttribute(DisplayName="User adds reservation correctly")]
+        [Xunit.TraitAttribute("FeatureTitle", "AddReservation")]
+        [Xunit.TraitAttribute("Description", "User adds reservation correctly")]
         [Xunit.TraitAttribute("Category", "good")]
-        public void UserAddsReviewCorrectly()
+        public void UserAddsReservationCorrectly()
         {
             string[] tagsOfScenario = new string[] {
                     "good"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("User adds review correctly", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("User adds reservation correctly", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 5
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -102,35 +102,35 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 6
-    testRunner.Given("I am user", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I am user", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 7
-    testRunner.And("Movie repository contains records", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("Movie repository contains records", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 8
-    testRunner.When("I make POST request to /api/Review/AddReview with body containing Review in json " +
-                        "format", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I make POST request to /api/Reservation/AddReservation with body containing Reser" +
+                        "vation in json format", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 9
     testRunner.Then("The response status code is OK", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 10
-    testRunner.And("Review table contains new record", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+    testRunner.And("Reservation table contains new record", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="User adds review incorrectly")]
-        [Xunit.TraitAttribute("FeatureTitle", "AddReview")]
-        [Xunit.TraitAttribute("Description", "User adds review incorrectly")]
+        [Xunit.SkippableFactAttribute(DisplayName="User adds reservation incorrectly")]
+        [Xunit.TraitAttribute("FeatureTitle", "AddReservation")]
+        [Xunit.TraitAttribute("Description", "User adds reservation incorrectly")]
         [Xunit.TraitAttribute("Category", "bad")]
-        public void UserAddsReviewIncorrectly()
+        public void UserAddsReservationIncorrectly()
         {
             string[] tagsOfScenario = new string[] {
                     "bad"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("User adds review incorrectly", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("User adds reservation incorrectly", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 13
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -142,14 +142,14 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 14
-    testRunner.Given("I am user", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I am user", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 15
-    testRunner.And("Movie repository contains records", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("Movie repository contains records", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 16
-    testRunner.When("I make POST request to /api/Review/AddReview with body containing Review in wrong" +
-                        " format", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I make POST request to /api/Reservation/AddReservation with body containing Reser" +
+                        "vation in wrong format", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 17
  testRunner.Then("The response status code is BadRequest", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -165,12 +165,12 @@ this.ScenarioInitialize(scenarioInfo);
             
             public FixtureData()
             {
-                AddReviewFeature.FeatureSetup();
+                AddReservationFeature.FeatureSetup();
             }
             
             void System.IDisposable.Dispose()
             {
-                AddReviewFeature.FeatureTearDown();
+                AddReservationFeature.FeatureTearDown();
             }
         }
     }
