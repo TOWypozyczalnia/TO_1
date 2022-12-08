@@ -48,7 +48,7 @@ namespace App.BddDetailsTest.StepDefinitions
         public void WhenIMakeGETRequestToApiMovieGetAll()
         {
             HttpClient client = new();
-            response = client.GetAsync("http://localhost:8081/api/Review/GetSingle{1}").Result;
+            response = client.GetAsync("http://localhost:8081/api/Review/GetSingle{0}").Result;
         }
 
         [Then(@"The response status code is OK")]
