@@ -26,5 +26,7 @@ jobs:
       run: dotnet restore net
     - name: Build
       run: dotnet build -c Release --no-restore net
-    - name: Test
-      run: dotnet test net
+    - name: Run unit Tests
+      run: dotnet test --no-build net/App.UnitTest
+    - name: Run integration Tests
+      run: dotnet test --no-build net/App.BddTest
