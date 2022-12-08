@@ -20,6 +20,7 @@ public class AppDbContext : DbContext, IAppDbContext
     public DbSet<Movie> Movie { get; set; }
     public DbSet<Director> Director { get; set; }
     public DbSet<LoggedUser> LoggedUser { get; set; }
+    public DbSet<Reservation> Reservation { get; set; }
     public DbSet<Review> Review { get; set; }
     public DbSet<UserSimilarity> UserSimilarity { get; set; }
     public DbSet<LoggedUserMovie> LoggedUserMovie { get; set; }

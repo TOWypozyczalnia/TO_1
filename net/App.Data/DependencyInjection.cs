@@ -17,6 +17,7 @@ public static class DependencyInjection
             .AddScoped<IDirectorRepository, DirectorRepository>()
             .AddScoped<ILoggedUserRepository, LoggedUserRepository>()
             .AddScoped<IReviewRepository, ReviewRepository>()
+            .AddScoped<IReservationRepository, ReservationRepository>()
             .AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(configuration["Data:AppConnection:ConnectionString"]))
             .AddScoped<IAppDbContext>(provider => provider.GetService<AppDbContext>());

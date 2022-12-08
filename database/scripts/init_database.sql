@@ -67,6 +67,15 @@ CREATE TABLE [dbo].[Review] (
     CONSTRAINT [PK_Review] PRIMARY KEY CLUSTERED([Id] ASC)
 );
 
+CREATE TABLE [dbo].[Reservation] (
+    [Id] INT NOT NULL IDENTITY(1,1),
+    [UserId] INT NOT NULL CONSTRAINT FK_Reservation_LoggedUser REFERENCES dbo.LoggedUser(Id),
+    [MovieId] INT NOT NULL CONSTRAINT FK_Reservation_Movie REFERENCES dbo.Movie(Id),
+    [ReservationDate] DATETIME NOT NULL,
+    [ExpirationDate ] DATETIME,
+    CONSTRAINT [PK_Reservation] PRIMARY KEY CLUSTERED([Id] ASC)
+);
+
 CREATE TABLE [dbo].[LoggedUserMovie] (
     [UserId] INT NOT NULL CONSTRAINT FK_LoggedUserMovie_LoggedUser REFERENCES dbo.LoggedUser(Id),
     [MovieId] INT NOT NULL CONSTRAINT FK_LoggedUserMovie_Movie REFERENCES dbo.Movie(Id),
