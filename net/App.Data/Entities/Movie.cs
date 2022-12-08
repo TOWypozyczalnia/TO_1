@@ -10,5 +10,6 @@ public class Movie : IBaseEntity<int>
     public int Id { get; set; }
     public string Name { get; set; }
     public DateTime ProductionYear { get; set; }
+    public int Unavailable { get; set; }
     public int BoxOffice { get; set; }
 }

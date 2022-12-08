@@ -16,14 +16,16 @@ namespace App.BddTest.StepDefinitions
     [Binding, Scope(Feature = "AddReservation")]
     public class AddReservationStepDefinitions
     {
-        private IConfigurationBuilder config = new ConfigurationBuilder().AddJsonFile("appsettings-Test.json");
-        private DbContextOptions<AppDbContext> options = new();
+        private static IConfigurationBuilder config = new ConfigurationBuilder().AddJsonFile("appsettings-Test.json");
+        private static DbContextOptions<AppDbContext> options = new();
 
-        private AppDbContext dbContext;
+        private static AppDbContext dbContext;
 
-        private IMovieRepository movieRepo;
-        private ILoggedUserRepository userRepo;
-        private IReservationRepository reservationRepo;
+        private static IMovieRepository movieRepo;
+        private static ILoggedUserRepository userRepo;
+        private static IReservationRepository reservationRepo;
+
+        private static HttpClient client;
 
         private readonly Movie testMovie = new()
         {
@@ -48,14 +50,17 @@ namespace App.BddTest.StepDefinitions
 
         private HttpResponseMessage response;
 
-        [BeforeScenario]
-        public void Setup()
+        [BeforeFeature]
+        public static void Setup()
         {
             dbContext = new(config.Build(), options);
 
             movieRepo = new MovieRepository(dbContext);
             userRepo = new LoggedUserRepository(dbContext);
             reservationRepo = new ReservationRepository(dbContext);
+
+            WebApplicationFactory<Program> factory = new WebApplicationFactory<Program>().WithWebHostBuilder(b => b.UseEnvironment("Test"));
+            client = factory.CreateClient();
         }
 
         [Given(@"I am user")]
@@ -75,9 +80,6 @@ namespace App.BddTest.StepDefinitions
         [When(@"I make POST request to /api/Reservation/AddReservation with body containing Reservation in json format")]
         public void WhenIMakePOSTRequestToApiReservationAddReservationWithBodyContainingReservationInJsonFormat()
         {
-            WebApplicationFactory<Program> factory = new WebApplicationFactory<Program>().WithWebHostBuilder(b => b.UseEnvironment("Test"));
-            HttpClient client = factory.CreateClient();
-
             string jsonData = JsonSerializer.Serialize(testReservation).Remove(2, 7);    // Remove Id from json
             HttpContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
             response = client.PostAsync("/api/Reservation/AddReservation", content).Result;
@@ -104,9 +106,6 @@ namespace App.BddTest.StepDefinitions
         [When(@"I make POST request to /api/Reservation/AddReservation with body containing Reservation in wrong format")]
         public void WhenIMakePOSTRequestToApiReservationAddReservationWithBodyContainingReservationInWrongFormat()
         {
-            WebApplicationFactory<Program> factory = new WebApplicationFactory<Program>().WithWebHostBuilder(b => b.UseEnvironment("Test"));
-            HttpClient client = factory.CreateClient();
-
             string jsonData = "{\"Garbage\"}";
             HttpContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
             response = client.PostAsync("/api/Reservation/AddReservation", content).Result;
